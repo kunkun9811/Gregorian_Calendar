@@ -2,17 +2,18 @@
 #define MONTH_HPP
 
 #include <iostream>
+#include <vector>
 
 #include "day.hpp"
 
 using namespace std;
 
-template <typename T>
 class Month {
     private:
-        vector<Day> days;
+	int monthNumber;
+        vector<Day*> days;
     public:
-        Month();
+        Month(int monthNum, int yearNum);
     
 };
 

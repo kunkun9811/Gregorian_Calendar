@@ -2,14 +2,27 @@
 #define YEAR_HPP
 
 #include <iostream>
+#include <vector>
 
 #include "month.hpp"
 
 using namespace std;
 
-template <typename T>
+/* Year:
+ *	DATA STRUCTUR: AVL Tree
+ *
+ *
+ *
+ *
+ *
+ */
+
 class Year{
-    
+	private:
+		int yearNumber;
+		vector<Month*> months;	
+	public:
+		Year(int yearNum); 
 };
 
 

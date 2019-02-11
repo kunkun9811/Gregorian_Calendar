@@ -22,11 +22,12 @@ class Day {
      *          back from file
      */
     private: 
+	int dayNumber;
         int numOfThings;
         Todo* task;
     public:
         /* Constructor */
-        Day() : numOfThings(0), task(NULL){}
+        Day(int yearNum, int monthNum, int dayNum) : numOfThings(0), task(NULL){}
         
         /* Getter for numOfThings */
         int getNumOfThings() {
