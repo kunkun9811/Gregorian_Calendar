@@ -5,12 +5,14 @@
 #include <vector>
 
 #include "day.hpp"
+#include "year.hpp"
 
 using namespace std;
 
-class Month {
+class Month : public Year{
     private:
-	int monthNumber;
+        int monthNumber;
+        int yearNumber;
         vector<Day*> days;
     public:
         Month(int monthNum, int yearNum);

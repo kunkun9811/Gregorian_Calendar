@@ -1,13 +1,16 @@
 #include <iostream>
 
 #include "month.hpp"
+#include "year.hpp"
+
+using namespace std;
 
 Month::Month(int monthNum, int yearNum){
 	if(monthNum == 1){
 		days.resize(31);	
 	}
 	else if(monthNum == 2){
-		if(Year::leapYear(yearNum)){
+		if(isLeapYear()){
 			days.resize(29);	
 		}
 		else days.resize(28);
@@ -40,7 +43,7 @@ Month::Month(int monthNum, int yearNum){
 		days.resize(30);	
 	}
 	else if(monthNum == 12){
-		days.resize(31)	
+		days.resize(31);	
 	}
 	else{
 		cout << "Invalid Month Number" << endl;

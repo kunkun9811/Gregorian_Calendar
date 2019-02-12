@@ -17,7 +17,7 @@
 
 using namespace std;
 
-/* Year:
+/* Calendar:
  *	Function:
  *		(1) Print the whole year
  *			OPTION: Choose Print Specific Year
@@ -43,7 +43,7 @@ using namespace std;
  *		(4) Remove a specific event
  *			OPTION: Choose remove event
  *			FORMAT: string1 = "1998/1/1"
- *				string2 = "*Event title*"
+ *				    string2 = "*Event title*"
  *
  *
  *
@@ -57,10 +57,16 @@ using namespace std;
  */
 class Calendar {
 	private:
-        
-    	public:
-        	Calendar();
-   	 
+        Year *yearRoot;
+        bool insertYear(int yearNum);
+    public:
+        Calendar() : yearRoot(NULL) {}
+   	    ~Calendar();
+   	    void printYear();
+   	    void printMonth();
+   	    void printTodos() const;
+   	    bool setEvent() const;
+   	    bool year_Exist() const;
 };
 
 #endif

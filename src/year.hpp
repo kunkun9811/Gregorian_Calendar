@@ -19,10 +19,22 @@ using namespace std;
 
 class Year{
 	private:
-		int yearNumber;
+		int height;
 		vector<Month*> months;	
+		
+		void rotateLeft(Year *theNode);
+		void rotateRight(Year *theNode);
+		void rotateLeftKink(Year *theNode);
+		void rotateRightKink(Year *theNode);
 	public:
-		Year(int yearNum); 
+		Year *leftYear;
+		Year *rightYear;
+		Year *parent;
+		int yearNumber;						// This year's number
+	
+		Year(const int yearNum);
+		void adjustHeight();
+		bool isLeapYear() const;
 };
 
 
