@@ -38,19 +38,29 @@ using namespace std;
  *			OPTION: Choose print TODO
  *			FORMAT: 1998/1/1
  *		(3) Set Event on a specific date
+ *			OPTION: Choose Set event
  *			FORMAT: 1998/1/1	
+ *		(4) Remove a specific event
+ *			OPTION: Choose remove event
+ *			FORMAT: string1 = "1998/1/1"
+ *				string2 = "*Event title*"
  *
+ *
+ *
+ *
+ *	Extra Function:
+ *		(1) Income for each day
  *
  *
  *
  *
  */
 class Calendar {
-    protected:
+	private:
         
-    public:
-        Calendar();
-    
+    	public:
+        	Calendar();
+   	 
 };
 
 #endif
