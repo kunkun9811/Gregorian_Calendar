@@ -2,5 +2,4 @@
 
 #include "day.hpp"
 
-using namespace std;
 

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <stack>
 
 #include "month.hpp"
 
@@ -20,8 +19,7 @@ using namespace std;
 
 class Year{
 	private:
-		int yearNumber;						// This year's number
-		int height;							// This year node's height in the AVL Tree
+		int height;
 		vector<Month*> months;	
 		
 		void rotateLeft(Year *theNode);
@@ -32,12 +30,11 @@ class Year{
 		Year *leftYear;
 		Year *rightYear;
 		Year *parent;
-		
+		int yearNumber;						// This year's number
+	
 		Year(const int yearNum);
-		unsigned int getYearNumber();
-		void setYearNumber(int yearNum);
-		unsigned int getHeight();
-		void adjustHeight(stack<string> &path);
+		void adjustHeight();
+		bool isLeapYear() const;
 };
 
 

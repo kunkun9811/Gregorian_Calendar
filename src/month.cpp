@@ -3,9 +3,7 @@
 #include "month.hpp"
 #include "year.hpp"
 
-using namespace std;
-
-Month::Month(int monthNum, int yearNum){
+Month::Month(const int &monthNum, const int &yearNum){
 	if(monthNum == 1){
 		days.resize(31);	
 	}
@@ -48,4 +46,9 @@ Month::Month(int monthNum, int yearNum){
 	else{
 		cout << "Invalid Month Number" << endl;
 	}
+}
+
+bool Month::isLeapYear() const {
+	if(((yearNumber % 4 == 0) && (yearNumber % 100 != 0)) || (yearNumber % 400 == 0)) return true;
+	else return false;
 }

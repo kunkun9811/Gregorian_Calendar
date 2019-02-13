@@ -4,18 +4,16 @@
 #include <iostream>
 #include <vector>
 
-#include "day.hpp"
+#include "year.hpp"
 
 using namespace std;
 
-class Month{
+class Month : public Year{
     private:
         int monthNumber;
         int yearNumber;
-        vector<Day*> days;
     public:
         Month(const int &monthNum, const int &yearNum);
-        bool isLeapYear() const;
 };
 
 #endif
