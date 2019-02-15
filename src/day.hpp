@@ -2,6 +2,7 @@
 #define DAY_HPP
 
 #include <iostream>
+#include <queue>
 
 #include "todo.hpp"
 
@@ -22,12 +23,14 @@ class Day {
      *          back from file
      */
     private: 
-	int dayNumber;
+        int yearNumber;
+        int monthNumber;
+	    int dayNumber;
         int numOfThings;
-        Todo* task;
+        priority_queue<*todo> todos;
     public:
         /* Constructor */
-        Day(int yearNum, int monthNum, int dayNum) : numOfThings(0), task(NULL){}
+        Day(int yearNum, int monthNum, int dayNum) : numOfThings(0){}
         
         /* Getter for numOfThings */
         int getNumOfThings() {
