@@ -1,4 +1,6 @@
 #include <iostream>
+#include <array>
+#include <string>
 
 #include "base.hpp"
 #include "derived.hpp"
@@ -12,5 +14,10 @@ int main(){
     b.print();
     d.print();
     
+    string a = "hello";
+    cout << a.size() << endl;
     return 0;
 }
+
+
+

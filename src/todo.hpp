@@ -3,7 +3,7 @@
 
 /* Variables:
  *      (1) task = string of the work you need
- *      (2) importance = level of importance
+ *      (2) importance = levesl of importance
  *              1 = IMPORTANT AF
  *              2 = IMPORTANT
  *              3 = MODERATELY IMPORTANT

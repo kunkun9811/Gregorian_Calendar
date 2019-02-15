@@ -36,17 +36,32 @@ void Year::adjustHeight(stack<string> &path){
 	}
 	
 	// Check if Tree is unbalanced
-	stack<string> tempStack = path;						// Stack that help push back to the "Path" stack
-	int LHeight = this->leftYear->getHeight();
-	int RHeight = this->rightYear->getHeight();
+	int LHeight = 0;
+	int RHeight = 0;
+	
+	
+	if(this->leftYear == NULL) {
+		LHeight = 0;
+	}
+	else {
+		LHeight = this->leftYear->getHeight();
+	}
+	
+	if(this->rightYear == NULL) {
+		RHeight = 0;
+	}
+	else {
+		RHeight = this->rightYear->getHeight();
+	}
 	
 	if(abs(LHeight - RHeight) > 1){
 		
 		// Checking the last two Node visited
-		string thePath = tempStack.top();
-		tempStack.pop();
-		thePath += tempStack.top();
-		tempStack.pop();
+		string thePath = "";
+		thePath += path.top();
+		path.pop();
+		thePath += path.top();
+		path.pop();
 
 		if(thePath == "RR"){
 			rotateLeft(this);
@@ -63,25 +78,46 @@ void Year::adjustHeight(stack<string> &path){
 	}
 	
 	// Post fixing tree, adjust the Height for the current node
-	LHeight = this->leftYear->getHeight();
-	RHeight = this->rightYear->getHeight();
+	if(this->leftYear == NULL) LHeight = 0;
+	else LHeight = this->leftYear->getHeight();
+	
+	if(this->rightYear == NULL) RHeight = 0;
+	else RHeight = this->rightYear->getHeight();
+	
 	this->height = max(LHeight, RHeight) + 1;
 	
 	
 }
 
-void Year::rotateLeft(Year *theNode){
+void Year::rotateLeft(Year *top){
+	Year *oldTopParent = top->parent;
+	Year *newTop = top->rightYear;
+	Year *rightLeftChild = top->rightYear->leftYear;
+	
+	// Edge case: if Top is root, don't set oldparent to newTop
+	if(oldTopParent != NULL){
+		if(oldTopParent->leftYear == top){
+			oldTopParent->leftYear = newTop;
+		}
+		else if(oldTopParent->rightYear == top){
+			oldTopParent->rightYear = newTop;				
+		}
+	}
+	newTop->parent = oldTopParent;
+	top->parent = newTop;
+	top->rightYear = rightLeftChild;
+	rightLeftChild->parent = top;
+	newTop->leftYear = top;
+}
+
+void Year::rotateRight(Year *top){
 	
 }
 
-void Year::rotateRight(Year *theNode){
+void Year::rotateLeftKink(Year *top){
 	
 }
 
-void Year::rotateLeftKink(Year *theNode){
-	
-}
-
-void Year::rotateRightKink(Year *theNode){
+void Year::rotateRightKink(Year *top){
 	
 }
