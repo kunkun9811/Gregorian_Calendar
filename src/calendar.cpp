@@ -59,7 +59,7 @@ bool Calendar::insertYear(int yearNum){
                     else if(currYear->parent->rightYear == currYear){
                         path.push("R");
                     }
-                    currYear = currYear->pasrent;
+                    currYear = currYear->parent;
                     currYear->adjustHeight(path);
                 }
                 return true;
