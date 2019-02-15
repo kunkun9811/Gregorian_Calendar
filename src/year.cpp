@@ -10,6 +10,7 @@ using namespace std;
 
 Year::Year(const int yearNum){
 	setYearNumber(yearNum);
+	height = 1;
 	leftYear = rightYear = parent = NULL;
 	months.resize(12);
 	for(int i = 0; i < months.size(); i++){				
@@ -64,16 +65,16 @@ void Year::adjustHeight(stack<string> &path){
 		path.pop();
 
 		if(thePath == "RR"){
-			rotateLeft(this);
+			rotateLeft(this, path);
 		}
 		else if(thePath == "LL"){
-			rotateRight(this);
+			rotateRight(this, path);
 		}
 		else if(thePath == "RL"){
-			rotateLeftKink(this);
+			rotateLeftKink(this, path);
 		}
 		else if(thePath == "LR"){
-			rotateRightKink(this);
+			rotateRightKink(this, path);
 		}
 	}
 	
@@ -86,11 +87,12 @@ void Year::adjustHeight(stack<string> &path){
 	
 	this->height = max(LHeight, RHeight) + 1;
 	
-	
+	return;
 }
 
-void Year::rotateLeft(Year *top){
+void Year::rotateLeft(Year *top, stack<string> &path){
 	// Prevent rotating NULL 
+	cout << "I'm in rotateLeft" << endl;
 	if(top == NULL) return;
 	
 	Year *oldTopParent = top->parent;
@@ -111,10 +113,18 @@ void Year::rotateLeft(Year *top){
 	top->rightYear = rightLeftChild;
 	if(rightLeftChild != NULL) rightLeftChild->parent = top;
 	newTop->leftYear = top;
+	
+	// Adjust Height after rotation
+	if(oldTopParent != NULL){
+		oldTopParent->adjustHeight(path);
+	}
+	newTop->adjustHeight(path);
+	top->adjustHeight(path);
 	return;
 }
 
-void Year::rotateRight(Year *top){
+void Year::rotateRight(Year *top, stack<string> &path){
+	cout << "I'm in rotateRight" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;
 	
@@ -136,10 +146,18 @@ void Year::rotateRight(Year *top){
 	top->leftYear = leftRightChild;
 	if(leftRightChild != NULL) leftRightChild->parent = top;
 	newTop->rightYear = top;
+	
+	// Adjust Height after rotation
+	if(oldTopParent != NULL){
+		oldTopParent->adjustHeight(path);
+	}
+	newTop->adjustHeight(path);
+	top->adjustHeight(path);
 	return;
 }
 
-void Year::rotateLeftKink(Year *top){
+void Year::rotateLeftKink(Year *top, stack<string> &path){
+	cout << "I'm in rotateLeftKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	
@@ -153,12 +171,18 @@ void Year::rotateLeftKink(Year *top){
 	oldRight->leftYear = newRightRight;
 	oldRight->parent = newRight;
 	if(newRightRight != NULL) newRightRight->parent = oldRight;
-	rotateLeft(top);
-	cout << "I'm here" << endl;
+	
+	// Adjust Height after first rotation
+	top->adjustHeight(path);
+	oldRight->adjustHeight(path);
+	newRight->adjustHeight(path);
+	
+	rotateLeft(top, path);
 	return;
 }
 
-void Year::rotateRightKink(Year *top){
+void Year::rotateRightKink(Year *top, stack<string> &path){
+	cout << "I'm in rotateRightKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	
@@ -172,6 +196,12 @@ void Year::rotateRightKink(Year *top){
 	oldLeft->rightYear = newLeftLeft;
 	oldLeft->parent = newLeft;
 	if(newLeftLeft != NULL) newLeft->parent = oldLeft;
-	rotateRight(top);
+	
+	// Adjust Height after first rotation
+	top->adjustHeight(path);
+	oldLeft->adjustHeight(path);
+	newLeft->adjustHeight(path);
+	
+	rotateRight(top, path);
 	return;
 }

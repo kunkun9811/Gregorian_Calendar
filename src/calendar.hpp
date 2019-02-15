@@ -58,15 +58,23 @@ using namespace std;
 class Calendar {
 	private:
         Year *yearRoot;
-        bool insertYear(int yearNum);
+        
+        void deleteAll(Year *yearNode);
     public:
         Calendar() : yearRoot(NULL) {}
-   	    ~Calendar();
+   	    ~Calendar(){
+   	        deleteAll(yearRoot);
+   	    }
+   	    bool insertYear(int yearNum);
+   	    Year *getYearRoot() const;
    	    void printYear();
    	    void printMonth();
    	    void printTodos() const;
    	    bool setEvent() const;
    	    bool year_Exist() const;
+   	    
+   	    // Just to test tree, PRINT TREE
+   	    void inorder(Year *yearNode) const;
 };
 
 #endif

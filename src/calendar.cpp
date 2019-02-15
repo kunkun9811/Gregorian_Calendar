@@ -5,6 +5,27 @@
 
 using namespace std;
 
+void Calendar::inorder(Year *yearNode) const{
+    if(yearNode == NULL){
+        return;
+    }
+    inorder(yearNode->leftYear);
+    cout << yearNode->getYearNumber() << endl;
+    // cout << "height Number: " << yearNode->getHeight() << endl << endl;
+    inorder(yearNode->rightYear);
+    return;  
+}
+
+void Calendar::deleteAll(Year *yearNode){
+    if(yearNode == NULL){
+        return;
+    }
+    yearNode->leftYear;
+    yearNode->rightYear;
+    delete yearNode;
+    return;
+}
+
 bool Calendar::insertYear(int yearNum){
     stack<string> path;
     if(yearRoot == NULL){
@@ -40,7 +61,7 @@ bool Calendar::insertYear(int yearNum){
                 
                 return true;
             }
-            currYear = currYear->leftYear;
+            else currYear = currYear->leftYear;
         }
         else if(yearNum > currYear->getYearNumber()){
             if(currYear->rightYear == NULL){
@@ -64,7 +85,7 @@ bool Calendar::insertYear(int yearNum){
                 }
                 return true;
             }
-            currYear = currYear->rightYear;
+            else currYear = currYear->rightYear;
         }
         else {
             cout << "Year already exist" << endl;
@@ -72,4 +93,8 @@ bool Calendar::insertYear(int yearNum){
         }
     }
     return false;
+}
+
+Year* Calendar::getYearRoot() const{
+    return yearRoot;
 }
