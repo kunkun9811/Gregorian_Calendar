@@ -109,7 +109,7 @@ void Year::rotateLeft(Year *top){
 	newTop->parent = oldTopParent;
 	top->parent = newTop;
 	top->rightYear = rightLeftChild;
-	rightLeftChild->parent = top;
+	if(rightLeftChild != NULL) rightLeftChild->parent = top;
 	newTop->leftYear = top;
 	return;
 }
@@ -134,7 +134,7 @@ void Year::rotateRight(Year *top){
 	newTop->parent = oldTopParent;
 	top->parent = newTop;
 	top->leftYear = leftRightChild;
-	leftRightChild->parent = top;
+	if(leftRightChild != NULL) leftRightChild->parent = top;
 	newTop->rightYear = top;
 	return;
 }
@@ -154,6 +154,7 @@ void Year::rotateLeftKink(Year *top){
 	oldRight->parent = newRight;
 	if(newRightRight != NULL) newRightRight->parent = oldRight;
 	rotateLeft(top);
+	cout << "I'm here" << endl;
 	return;
 }
 

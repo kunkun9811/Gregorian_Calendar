@@ -96,13 +96,13 @@ int main() {
     if(year8->parent == NULL) cout << "NULL" << endl << endl << endl;
     else cout << year8->parent->yearNumber << endl << endl << endl;
     
-    cout << "Year 2180 leftchild: ";
+    cout << "Year 2195 leftchild: ";
     if(year10->leftYear == NULL) cout << "NULL" << endl;
     else cout << year10->leftYear->yearNumber << endl;
-    cout << "Year 2180 rightchild: ";
+    cout << "Year 2195 rightchild: ";
     if(year10->rightYear == NULL) cout << "NULL" << endl;
     else cout << year10->rightYear->yearNumber << endl;
-    cout << "Year 2180 parent: ";
+    cout << "Year 2195 parent: ";
     if(year10->parent == NULL) cout << "NULL" << endl << endl << endl;
     else cout << year10->parent->yearNumber << endl << endl << endl;
     
