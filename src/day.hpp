@@ -2,12 +2,17 @@
 #define DAY_HPP
 
 #include <iostream>
-#include <queue>
 
 #include "todo.hpp"
 
 using namespace std;
 
+// class taskPtrCmpr{
+//     public: 
+//         bool operator()(Todo *&lhs, Todo *&rhs){
+//             return *lhs < *rhs;
+//         }
+// };
 
 class Day {
     
@@ -27,15 +32,27 @@ class Day {
         int monthNumber;
 	    int dayNumber;
         int numOfThings;
-        priority_queue<*todo> todos;
+        //Todo *todoRoot;
+        
+        void deleteAll(Todo *todoNode);
     public:
         /* Constructor */
-        Day(int yearNum, int monthNum, int dayNum) : numOfThings(0){}
+        Day(int yearNum, int monthNum, int dayNum);
+        ~Day(){
+            deleteAll(todoRoot);
+        }
         
         /* Getter for numOfThings */
         int getNumOfThings() {
             return numOfThings;
         }
+        bool insertTodo(const string &todoString, const int imp);
+        
+        // Just to test tree, PRINT TREE
+        void inorder(Todo *todoNode) const;
+        
+        // priority_queue<Todo*, vector<Todo*>, taskPtrCmpr> todos;
+        Todo *todoRoot;
         
         
      

@@ -22,8 +22,7 @@ using namespace std;
 class Year{
 	private:	
 		int yearNumber;							// This year's number
-		int height;
-		//int height;							// This year node's height in the AVL Tree
+		int height;								// This year node's height in the AVL Tree
 		vector<Month*> months;	
 		void rotateLeft(Year *theNode, stack<string> &path);
 		void rotateRight(Year *theNode, stack<string> &path);

@@ -16,26 +16,10 @@ int main() {
     
     cout << "Calendar" << endl;
     
-    Calendar a;
-    a.insertYear(1998);
-    a.insertYear(1900);
-    a.insertYear(2100);
-    a.insertYear(1800);
-    a.insertYear(1920);
-    a.insertYear(2050);
-    a.insertYear(2200);
-    a.insertYear(2300);
-    a.insertYear(2190);
-    a.insertYear(2180);
-    a.insertYear(1700);
-    a.insertYear(1850);
-    a.insertYear(1860);
-    
-    
-    a.inorder(a.getYearRoot());
-    
-    // cout << endl << endl;
-    // cout << "1998 Right:  " << a.getYearRoot()->rightYear->getYearNumber() << endl;
+    Day a(1998, 1, 1);
+    a.insertTodo("Wash Dishes", 3);
+    a.insertTodo("Do Homework", 1);
+    a.insertTodo("")
     
     return 0;
 }
@@ -45,6 +29,11 @@ int main() {
 /* Things I changed temporarily */
 // rotations in year.hpp need to be moved back to private AND YEAR NUMBER
 // rotations in year.cpp: I cout a lot of I'm in *this rotation*
+// day.hpp: I moved priority_queue to public, it should be private
+// day.hpp: I moved todoRoot to public, it should be private
+
+/* THING I NEED TO ADD */
+// Time of when the thing is happening !!!!!!!!
 
 /* temporary inorder print tree function */
     // void inorderPrint(Year *root);
@@ -57,6 +46,25 @@ int main() {
     //     inorderPrint(root->rightYear);
     //     return;
     // }
+    
+/* Calendar insert and inorder print tree testing code */
+    // Calendar a;
+    // a.insertYear(1998);
+    // a.insertYear(1900);
+    // a.insertYear(2100);
+    // a.insertYear(1800);
+    // a.insertYear(1920);
+    // a.insertYear(2050);
+    // a.insertYear(2200);
+    // a.insertYear(2300);
+    // a.insertYear(2190);
+    // a.insertYear(2180);
+    // a.insertYear(1700);
+    // a.insertYear(1850);
+    // a.insertYear(1860);
+    
+    
+    // a.inorder(a.getYearRoot());
 
 /* rotateLeftKink testing code */
     // Year *year1 = new Year(1998);
