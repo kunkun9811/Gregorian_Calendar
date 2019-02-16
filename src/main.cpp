@@ -17,9 +17,20 @@ int main() {
     cout << "Calendar" << endl;
     
     Day a(1998, 1, 1);
-    a.insertTodo("Wash Dishes", 3);
-    a.insertTodo("Do Homework", 1);
-    a.insertTodo("")
+    a.readDayFile();
+    // a.insertTodo("Wash Dishes", 3);
+    // a.insertTodo("Do Homework", 1);
+    // a.insertTodo("Play video game", 4);
+    // a.insertTodo("study", 2);
+    // a.insertTodo("sleep", 5);
+    // a.insertTodo("2 number 1", 1);
+    // a.insertTodo("3 number 1", 1);
+    // a.insertTodo("4 number 1", 1);
+    // a.insertTodo("5 number 1", 1);
+    // a.insertTodo("6 number 1", 1);
+    
+    
+    a.printByImpotyance();
     
     return 0;
 }
@@ -34,6 +45,7 @@ int main() {
 
 /* THING I NEED TO ADD */
 // Time of when the thing is happening !!!!!!!!
+// I need to modify things to do each time
 
 /* temporary inorder print tree function */
     // void inorderPrint(Year *root);

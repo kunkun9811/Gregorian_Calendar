@@ -1,0 +1,20 @@
+** FORMAT FOR EACH TODO FILE **     [exclude line 1 ~ 6, line 7 is the starting line]
+** FILE NAME = 1998-1-1.txt
+2               <- IMPORTANCE
+Wash Dishes     <- TODO
+^
+
+1
+Do Homework
+^
+5
+Play video game
+^
+2
+Text mom
+^
+3
+Gas the car
+^
+4
+sleep

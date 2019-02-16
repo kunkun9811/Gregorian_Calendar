@@ -32,7 +32,7 @@ class Day {
         int monthNumber;
 	    int dayNumber;
         int numOfThings;
-        //Todo *todoRoot;
+        Todo *todoRoot;
         
         void deleteAll(Todo *todoNode);
     public:
@@ -41,18 +41,19 @@ class Day {
         ~Day(){
             deleteAll(todoRoot);
         }
-        
-        /* Getter for numOfThings */
-        int getNumOfThings() {
+
+        int getNumOfThings() const{                                 // Get number of things in current day
             return numOfThings;
         }
+        Todo* getTodoRoot() const{
+            return todoRoot;
+        }
         bool insertTodo(const string &todoString, const int imp);
-        
-        // Just to test tree, PRINT TREE
-        void inorder(Todo *todoNode) const;
+        void printByImpotyance() const;
+        void inorder(const Todo * const &todoNode, int &i) const;
+        void readDayFile();
         
         // priority_queue<Todo*, vector<Todo*>, taskPtrCmpr> todos;
-        Todo *todoRoot;
         
         
      
@@ -60,3 +61,5 @@ class Day {
 
 
 #endif
+
+// I need CreateFile function and ReadFile Function

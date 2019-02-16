@@ -63,12 +63,13 @@ class Todo{
 };
 
 /* Overriding Outputting operator for Printing Information of the Todo Node*/
-ostream& operator<<(ostream&, const Todo&) __attribute__((weak));
-ostream& operator<<(ostream &out, const Todo &a){
-    out << a.getTask() << "\n";
-    out << a.getImportance() << "\n";
-    return out;
-}
+// ostream& operator<<(ostream&, const Todo&) __attribute__((weak));
+// ostream& operator<<(ostream &out, const Todo &a){
+//     // out << a.getTask() << "\n";
+//     // out << a.getImportance() << "\n";
+//     // printf("TODO: %s \n \n", a.getTask());
+//     // return out;
+// }
 
 
 
