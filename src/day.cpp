@@ -24,16 +24,51 @@ Day::Day(int yearNum, int monthNum, int dayNum){
  */
 void Day::readDayFile(){
     string fileName = "../server/" + to_string(yearNumber) + "-" + to_string(monthNumber) + "-" + to_string(dayNumber) + ".txt";
+    string imp;             // Temp for importance value before creating a TODO node
+    string todo;            // Temp for TODO value vefore creating a TODO node
+    string separator;       // The separating '^' character after each TODO in formatted text file
     ifstream dayFile;
     dayFile.open(fileName); 
     if(!dayFile.is_open()){             // If file doesn't exist, do nothing
         return; 
     }
     else{
-        
+        // testing how many times it while looped
+        int i = 1;
+        while(!getline(dayFile, imp).eof()){
+            getline(dayFile, todo);
+            getline(dayFile, separator);
+            insertTodo(todo, stoi(imp));
+            
+            // //Printing Tree to see tree structure after each insert;
+            // cout << "(*****" << i++ << "*****)" << endl;
+            // inorderTest(todoRoot);
+            // cout << endl;
+        }
     }
+    dayFile.close();
     return;
 }
+
+// this is a test must delete
+// void Day::inorderTest(const Todo * const &todoNode) const{
+//     if(todoNode == NULL){
+//         return;
+//     }
+//     inorderTest(todoNode->leftTodo);
+//     string tempString = todoNode->getTask();
+//     char *stringPtr = &(tempString.at(0));
+//     printf("[%d,%s @ %p]", todoNode->getImportance(), stringPtr, todoNode);
+//     cout << endl;
+//     printf("Parent: %p", todoNode->parent);
+//     cout << endl;
+//     printf("Left Todo: %p", todoNode->leftTodo);
+//     cout << endl;
+//     printf("Right Todo: %p", todoNode->rightTodo);
+//     cout << endl << endl;
+//     inorderTest(todoNode->rightTodo);
+//     return;
+// }
 
 void Day::deleteAll(Todo *todoNode){
     if(todoNode == NULL){
@@ -92,6 +127,7 @@ bool Day::insertTodo(const string &todoString, const int imp){
                     currTodo = currTodo->parent;
                     currTodo->adjustHeight(path);
                 }
+                todoRoot = currTodo;
                 numOfThings++;
                 return true;
             }
@@ -117,6 +153,7 @@ bool Day::insertTodo(const string &todoString, const int imp){
                     currTodo = currTodo->parent;
                     currTodo->adjustHeight(path);
                 }
+                todoRoot = currTodo;
                 numOfThings++;
                 return true;
             }

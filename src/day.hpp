@@ -27,6 +27,9 @@ class Day {
      *      (4) Need to format files so easier to extract info
      *          back from file
      */
+     // priority_queue<Todo*, vector<Todo*>, taskPtrCmpr> todos;
+     //         // this is a test must delete
+     // void inorderTest(const Todo * const &todoNode) const;
     private: 
         int yearNumber;
         int monthNumber;
@@ -53,7 +56,9 @@ class Day {
         void inorder(const Todo * const &todoNode, int &i) const;
         void readDayFile();
         
-        // priority_queue<Todo*, vector<Todo*>, taskPtrCmpr> todos;
+
+        
+        
         
         
      

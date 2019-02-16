@@ -115,11 +115,11 @@ void Year::rotateLeft(Year *top, stack<string> &path){
 	newTop->leftYear = top;
 	
 	// Adjust Height after rotation
+	top->adjustHeight(path);
+	newTop->adjustHeight(path);
 	if(oldTopParent != NULL){
 		oldTopParent->adjustHeight(path);
 	}
-	newTop->adjustHeight(path);
-	top->adjustHeight(path);
 	return;
 }
 
@@ -148,11 +148,11 @@ void Year::rotateRight(Year *top, stack<string> &path){
 	newTop->rightYear = top;
 	
 	// Adjust Height after rotation
+	top->adjustHeight(path);
+	newTop->adjustHeight(path);
 	if(oldTopParent != NULL){
 		oldTopParent->adjustHeight(path);
 	}
-	newTop->adjustHeight(path);
-	top->adjustHeight(path);
 	return;
 }
 

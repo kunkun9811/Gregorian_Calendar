@@ -57,8 +57,7 @@ bool Calendar::insertYear(int yearNum){
                     currYear = currYear->parent;
                     currYear->adjustHeight(path);
                 }
-                
-                
+                yearRoot = currYear;
                 return true;
             }
             else currYear = currYear->leftYear;
@@ -83,6 +82,7 @@ bool Calendar::insertYear(int yearNum){
                     currYear = currYear->parent;
                     currYear->adjustHeight(path);
                 }
+                yearRoot = currYear;
                 return true;
             }
             else currYear = currYear->rightYear;

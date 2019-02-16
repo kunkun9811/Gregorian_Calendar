@@ -106,11 +106,11 @@ void Todo::rotateLeft(Todo *top, stack<string> &path){
 	newTop->leftTodo = top;
 	
 	// Adjust Height after rotation
+	top->adjustHeight(path);
+	newTop->adjustHeight(path);
 	if(oldTopParent != NULL){
 		oldTopParent->adjustHeight(path);
 	}
-	newTop->adjustHeight(path);
-	top->adjustHeight(path);
 	return;
 }
 
@@ -139,11 +139,11 @@ void Todo::rotateRight(Todo *top, stack<string> &path){
 	newTop->rightTodo = top;
 	
 	// Adjust Height after rotation
+	top->adjustHeight(path);
+	newTop->adjustHeight(path);
 	if(oldTopParent != NULL){
 		oldTopParent->adjustHeight(path);
 	}
-	newTop->adjustHeight(path);
-	top->adjustHeight(path);
 	return;
 }
 
