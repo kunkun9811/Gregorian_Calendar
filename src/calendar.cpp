@@ -57,7 +57,7 @@ bool Calendar::insertYear(int yearNum){
                     currYear = currYear->parent;
                     currYear->adjustHeight(path);
                 }
-                yearRoot = currYear;
+                yearRoot = currYear;                // currYear has reached the most top node, set yearRoot to currYear
                 return true;
             }
             else currYear = currYear->leftYear;
@@ -82,7 +82,7 @@ bool Calendar::insertYear(int yearNum){
                     currYear = currYear->parent;
                     currYear->adjustHeight(path);
                 }
-                yearRoot = currYear;
+                yearRoot = currYear;            // currYear has reached the most top node, set yearRoot to currYear
                 return true;
             }
             else currYear = currYear->rightYear;

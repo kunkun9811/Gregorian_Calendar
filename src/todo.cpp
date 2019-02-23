@@ -196,3 +196,46 @@ void Todo::rotateRightKink(Todo *top, stack<string> &path){
 	rotateRight(top, path);
 	return;
 }
+
+/* Get the successor(or the next node) in the Inorder sequence */
+Todo* Todo::getSuccessor() {
+	// Case (1): If current todo node has no parent and has no right child
+	if(this->rightTodo == NULL && this->parent == NULL){
+		return this->leftTodo;
+	}
+	// Case (2): If current todo node has no right child
+	// ** NEED TO INCLUDE EDGE CASE WHERE THE NODE IS RIGHT MOST NODE **
+	else if(this->rightTodo == NULL && this->parent != NULL){
+		Todo* theSuc = successorAtAbove(this);
+		if(theSuc == NULL) return this;				// Happens when we are finding the successor of rightmost todo node (a.k.a. the largest todo Node)
+		else return theSuc;
+	}
+	// case (3): current todo node has right child
+	else if(this->rightTodo != NULL){
+		return successorAtRight(this->rightTodo);
+	}
+}
+
+/* Helper function for searching upward to find successor */
+Todo* Todo::successorAtAbove(Todo* currTodoNode){
+	Todo* currNode = currTodoNode;
+	Todo* currNodeParent = currNode->parent;
+	
+	while(currNodeParent != NULL){
+		if(currNode == currNodeParent->leftTodo) return currNodeParent;
+		else {
+			currNode = currNodeParent;
+			currNodeParent = currNodeParent->parent;
+		}
+	}
+	return currNodeParent;				// Will reach here if currTodoNode passed in is the right most node of the tree
+}
+
+/* Helpfer function for searching the left-most node on the right subtree */
+Todo* Todo::successorAtRight(Todo *currTodoNode) {
+	if(currTodoNode->leftTodo == NULL) return currTodoNode;
+	else if(currTodoNode->leftTodo != NULL) return successorAtRight(currTodoNode->leftTodo);
+}
+
+
+

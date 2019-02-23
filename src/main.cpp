@@ -12,12 +12,41 @@
 
 using namespace std;
 
+
+/* GOING TO START THE REMOVE TODO NODE AT DAY.CPP FOR DELETING EVENT */
 int main() {
     
     cout << "Calendar" << endl;
-    
-    Day a(1998, 1, 1);
+
+    Day a(1998, 1, 2);
     a.readDayFile();
+    a.printByImportance();
+
+    // a.setEvent("new todo1", 2);
+    // a.setEvent("new todo2", 3);
+    // a.setEvent("new todo3", 1);
+    a.deleteEvent("new todo2");
+    a.printByImportance();
+    
+    
+    return 0;
+}
+
+/* GAGDETS I CAN USE */
+// system("cls") - clear screen
+
+/* Things I changed temporarily */
+// rotations in year.hpp need to be moved back to private AND YEAR NUMBER
+// rotations in year.cpp: I cout a lot of I'm in *this rotation*
+// day.hpp: I moved priority_queue to public, it should be private
+// day.hpp: I moved todoRoot to public, it should be private
+
+/* THING I NEED TO ADD */
+// Time of when the thing is happening !!!!!!!!
+// I NEED TO NOT USE getline WHEN READING THE FILES. **DELETE EVENT AND DAY FILE IN DAY.CPP*
+    // NEED TO ALSO ADD DESCRIPTION, INSTEAD OF JUST TITLES
+
+/* Testing code for inserting */
     // a.insertTodo("Wash Dishes", 3);
     // a.insertTodo("Do Homework", 1);
     // a.insertTodo("Play video game", 4);
@@ -29,24 +58,6 @@ int main() {
     // a.insertTodo("5 number 1", 1);
     // a.insertTodo("6 number 1", 1);
     
-    
-    a.printByImpotyance();
-    
-    return 0;
-}
-
-
-
-/* Things I changed temporarily */
-// rotations in year.hpp need to be moved back to private AND YEAR NUMBER
-// rotations in year.cpp: I cout a lot of I'm in *this rotation*
-// day.hpp: I moved priority_queue to public, it should be private
-// day.hpp: I moved todoRoot to public, it should be private
-
-/* THING I NEED TO ADD */
-// Time of when the thing is happening !!!!!!!!
-// I need to modify things to do each time
-
 /* temporary inorder print tree function */
     // void inorderPrint(Year *root);
     // void inorderPrint(Year *root){

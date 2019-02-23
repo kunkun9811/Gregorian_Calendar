@@ -35,10 +35,13 @@ class Day {
         int monthNumber;
 	    int dayNumber;
         int numOfThings;
-        Todo *todoRoot;
+        //Todo *todoRoot;
         
         void deleteAll(Todo *todoNode);
+        bool removeNode(const Todo* theNode);
+        void addToFile(Todo *theTodo) const;                        // Helper function for set Event
     public:
+        Todo *todoRoot;
         /* Constructor */
         Day(int yearNum, int monthNum, int dayNum);
         ~Day(){
@@ -51,16 +54,12 @@ class Day {
         Todo* getTodoRoot() const{
             return todoRoot;
         }
-        bool insertTodo(const string &todoString, const int imp);
-        void printByImpotyance() const;
-        void inorder(const Todo * const &todoNode, int &i) const;
-        void readDayFile();
-        
-
-        
-        
-        
-        
+        bool setEvent(const string &todoString, const int imp);         // Set event 
+        bool deleteEvent(const string &todoString);                     // Delete event
+        bool insertTodo(const string &todoString, const int imp);       // Insert a newly created Todo Node to tree
+        void printByImportance() const;                                 // Print By level of importance
+        void inorder(const Todo * const &todoNode, int &i) const;       // Print the tree in Inorder
+        void readDayFile();                                             // Add to file (or write to file)
      
 };
 
