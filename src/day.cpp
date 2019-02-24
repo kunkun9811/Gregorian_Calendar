@@ -146,9 +146,17 @@ bool Day::setEvent(const string &todoString, const int imp){
 
 /* Helper function for deleteEvent
  * Purpose: Delete the todo node in the AVL data structure of Todo class
+ * 
+ * Algorithm: (1) Check if the task is the same, if yes check the three cases
+ *                  (a) nodeToDelete has two children
+ *                  (b) nodeToDelete has one children
+ *                  (c) nodeToDelete has no child
+ * 
+ *            (2) If the task is not the same, traverse tree **WITH THENODE'S IMPORTANCE**, not the node's task
+ *                  (a) If theNode's importance is less than nodeToDelete's (or currNode's), traverse left subtree
+ *                  (b) If theNode's importance is greater or equal to nodeToDelete's (or currNode's) importance, traverse right subtree
  */
 bool Day::removeNode(const Todo* theNode){
-    cout << "I'm in remove Node" << endl;
     Todo* nodeToDelete = todoRoot;
     while(nodeToDelete != NULL){
         if(theNode->getTask() == nodeToDelete->getTask()){
@@ -156,29 +164,65 @@ bool Day::removeNode(const Todo* theNode){
             if(nodeToDelete->leftTodo != NULL && nodeToDelete->rightTodo != NULL){
                 Todo* theSuccessor = nodeToDelete->getSuccessor();
                 Todo* theSucOldParent = theSuccessor->parent;              // Later we traverse from theSuccessor's parent to the top and adjustHeight() for each Node encountered
-                if(theSuccessor != nodeToDelete->rightTodo){      
-                    if(theSuccessor == theSuccessor->parent->leftTodo) theSuccessor->parent->leftTodo = NULL;
-                    else theSuccessor->parent->rightTodo = NULL;
+                // if(theSuccessor != nodeToDelete->rightTodo){      
+                //     if(theSuccessor == theSuccessor->parent->leftTodo) theSuccessor->parent->leftTodo = NULL;
+                //     else theSuccessor->parent->rightTodo = NULL;
+                // }
+                // theSuccessor->rightTodo = nodeToDelete->rightTodo;      // Set theSuccessor's rightTodo to nodeToDelete's rightTodo
+                // nodeToDelete->rightTodo->parent = theSuccessor;         // set nodeToDelete's rightTodo's parent to theSuccessor
+                // theSuccessor->leftTodo = nodeToDelete->leftTodo;        // Set theSuccessor's leftTodo to nodeToDelete's leftTodo
+                // nodeToDelete->leftTodo->parent = theSuccessor;          // set nodeToDelete's leftTodo's parent to theSuccessor
+                // theSuccessor->parent = nodeToDelete->parent;            // Set theSuccessor's parent to nodeToDelete's parent
+                
+                /* I don't think I need to check if theSuccessor is the left or right child of its parent,
+                 * Because we are finding the left-most node in the right subtree(aka the meaning of successor)
+                 * If It is the immediate right node of the nodeToDelete, then still we don't have to check
+                 * if it is left node or right node of the parent. Because, in this case and any other,
+                 * if the successor has a right child (definitely not going to have a left child, or else we would've traversed left), 
+                 * then connect that right child to the successor's old parent (which in this case would be the 'modified' nodeToDelete)
+                 * Just like how you would do to the left most node of right subtree (aka any other successors)
+                 */
+                if(theSuccessor->rightTodo != NULL){
+                    // Set right node of theSuccessor to theSucOldParent (no matter what)
+                    theSuccessor->rightTodo->parent = theSucOldParent;
+                    
+                    // If successor is the imeediate right node of nodeToDelete
+                    if(theSuccessor == nodeToDelete->rightTodo) {
+                        theSucOldParent->rightTodo = theSuccessor->rightTodo;
+                    }
+                    // If not
+                    else {
+                        theSucOldParent->leftTodo = theSuccessor->rightTodo;
+                    }
+                } 
+                else{   // theSuccessor->rightTodo == NULL
+                    // If successor is the imeediate right node of nodeToDelete
+                    if(theSuccessor == nodeToDelete->rightTodo) {
+                        theSucOldParent->rightTodo = theSuccessor->rightTodo;
+                    }
+                    // If not
+                    else {
+                        theSucOldParent->leftTodo = NULL;
+                    }
                 }
-                theSuccessor->rightTodo = nodeToDelete->rightTodo;      // Set theSuccessor's rightTodo to nodeToDelete's rightTodo
-                nodeToDelete->rightTodo->parent = theSuccessor;         // set nodeToDelete's rightTodo's parent to theSuccessor
-                theSuccessor->leftTodo = nodeToDelete->leftTodo;        // Set theSuccessor's leftTodo to nodeToDelete's leftTodo
-                nodeToDelete->leftTodo->parent = theSuccessor;          // set nodeToDelete's leftTodo's parent to theSuccessor
-                theSuccessor->parent = nodeToDelete->parent;            // Set theSuccessor's parent to nodeToDelete's parent
+                nodeToDelete->setTask(theSuccessor->getTask());
+                nodeToDelete->setImportance(theSuccessor->getImportance());
+                delete theSuccessor;
+                
                 
                 // FIRST CHECK IF PARENT IS NULL, IF NOT, PRECEDE
                 // Check if nodeToDelete is its parent's leftTodo or rightTodo. If is its leftTodo, set nodeToDelete's parent's leftTodo to theSuccessor
                 // otherwise, set nodetToDelete's parent's rightTodo to theSuccessor
-                if(nodeToDelete->parent != NULL){
-                    if(nodeToDelete == nodeToDelete->parent->leftTodo) nodeToDelete->parent->leftTodo = theSuccessor;       
-                    else nodeToDelete->parent->rightTodo = theSuccessor;
-                }
+                // if(nodeToDelete->parent != NULL){
+                //     if(nodeToDelete == nodeToDelete->parent->leftTodo) nodeToDelete->parent->leftTodo = theSuccessor;       
+                //     else nodeToDelete->parent->rightTodo = theSuccessor;
+                // }
                 
-                delete nodeToDelete;        // delete nodeToDelete
+                // delete nodeToDelete;        // delete nodeToDelete
                 
                 // Adjust Height starting from the Successor's original parent - Because that's the bottom most node that had its subtrees modified. Anything lower than it has nothing changed.
                 Todo* nodeToAdjust = theSucOldParent;
-                stack<string> path;     // There's no need for path stack here. It is for function calling
+                stack<string> path;         // There's no need for path stack here. It is for function calling
                 int LHeight = 0;
                 int RHeight = 0;
                 //int flag = 0;           // Flag to see if root is checked and going to the left subtree of root. when AFTER checking root(flag = 1), change from checking RR and RL to LL and LR
@@ -194,27 +238,32 @@ bool Day::removeNode(const Todo* theNode){
                     
                     if(abs(LHeight - RHeight) > 1){
                         if(RHeight > LHeight){          // Have not reached root yet
-                            if(nodeToAdjust->rightTodo != NULL){
+                            if(nodeToAdjust->rightTodo != NULL){                    // RR
                                 if(nodeToAdjust->rightTodo->rightTodo != NULL){
                                     nodeToAdjust->rotateLeft(nodeToAdjust, path);
                                 }
-                                else if(nodeToAdjust->rightTodo->leftTodo != NULL){
+                                else if(nodeToAdjust->rightTodo->leftTodo != NULL){ // RL
                                     nodeToAdjust->rotateLeftKink(nodeToAdjust, path);
                                 }
                             }
                         }
                         else{   // LHeight > RHeihgt
-                            if(nodeToAdjust->leftTodo != NULL){
-                                if(nodeToAdjust->leftTodo->leftTodo != NULL){
+                            if(nodeToAdjust->leftTodo != NULL){ 
+                                if(nodeToAdjust->leftTodo->leftTodo != NULL){           // LL 
                                     nodeToAdjust->rotateRight(nodeToAdjust, path);
                                 }
-                                else if(nodeToAdjust->leftTodo->rightTodo != NULL){
+                                else if(nodeToAdjust->leftTodo->rightTodo != NULL){     // LR
                                     nodeToAdjust->rotateRightKink(nodeToAdjust, path);
                                 }
                             }
                         }
                     }
+                    /* After everything is adjusted, Fix the height of the current Node to above */
+                    // Again, the stack 'path' has nothing to do with function, it's just for the sake of function calling
+                    nodeToAdjust->adjustHeight(path);
+                    nodeToAdjust = nodeToAdjust->parent;
                 }
+                numOfThings--;
                 return true;
             }
             
@@ -229,12 +278,14 @@ bool Day::removeNode(const Todo* theNode){
                         nodeToDeleteOldParent->leftTodo = nodeToDeleteLeftTodo;
                         nodeToDeleteLeftTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
+                        numOfThings--;
                         return true;
                     }
                     else{
                         nodeToDeleteOldParent->rightTodo = nodeToDeleteLeftTodo;
                         nodeToDeleteLeftTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
+                        numOfThings--;
                         return true;
                     }
                 }
@@ -245,12 +296,14 @@ bool Day::removeNode(const Todo* theNode){
                         nodeToDeleteOldParent->leftTodo = nodeToDeleteRightTodo;
                         nodeToDeleteRightTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
+                        numOfThings--;
                         return true;
                     }
                     else{
                         nodeToDeleteOldParent->rightTodo = nodeToDeleteRightTodo;
                         nodeToDeleteRightTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
+                        numOfThings--;
                         return true;
                     }
                 }
@@ -261,21 +314,20 @@ bool Day::removeNode(const Todo* theNode){
                 if(nodeToDelete == nodeToDelete->parent->leftTodo) {
                     nodeToDelete->parent->leftTodo = NULL;
                     delete nodeToDelete;
+                    numOfThings--;
                     return true;
                 }
                 else if(nodeToDelete == nodeToDelete->parent->rightTodo){
                     nodeToDelete->parent->rightTodo = NULL;
                     delete nodeToDelete;
+                    numOfThings--;
                     return true;
                 }
             }
         }
-        else {
-            // cout << "I'm here" << endl;
-            if(nodeToDelete->getImportance() < theNode->getImportance()) nodeToDelete = nodeToDelete->rightTodo; 
-            else if(nodeToDelete->getImportance() > theNode->getImportance()) nodeToDelete = nodeToDelete->leftTodo;
-        }
-        
+        //
+        else if(theNode->getImportance() < nodeToDelete->getImportance()) nodeToDelete = nodeToDelete->leftTodo;
+        else if(theNode->getImportance() >= nodeToDelete->getImportance()) nodeToDelete = nodeToDelete->rightTodo;
     }
     return false;
 }
@@ -309,10 +361,10 @@ bool Day::deleteEvent(const string &todoString){
         bool elementRemoved = false;                // Flag that shows if an element is removed, if not, it means the element was not in the file
         for(int i = 0; i < todoVector.size(); i++){
             if( todoString == todoVector.at(i)){
-                todoVector.erase(todoVector.begin() + i);                // Only delete one
-                impVector.erase(impVector.begin() + i);
                 theImp = impVector.at(i);
                 theTodo = todoVector.at(i);
+                todoVector.erase(todoVector.begin() + i);                // Only delete one
+                impVector.erase(impVector.begin() + i);
                 elementRemoved = true;
                 break;
             }
@@ -336,7 +388,6 @@ bool Day::deleteEvent(const string &todoString){
                 for(int i = 0; i < todoVector.size(); i++){
                     int impVal = impVector.at(i);
                     imp = to_string(impVal);
-                    cout << "***IMP***" << imp << endl;
                     todo = todoVector.at(i);
                     oss << imp << endl;
                     oss << todo << endl;
@@ -350,8 +401,8 @@ bool Day::deleteEvent(const string &todoString){
             // Create temporary Todo Node to traverse Tree
             Todo* tempTodo = new Todo(theTodo, theImp);
             removeNode(tempTodo);
+            // cout << "I'm here" << endl;
             delete tempTodo;            // deallocate tempTodo
-            cout << "I'm here 2" << endl;
             return true;
         }
         else{

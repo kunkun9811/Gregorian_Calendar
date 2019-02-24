@@ -13,8 +13,18 @@ string Todo::getTask() const{
     return task;
 }
 
+void Todo::setTask(string theTask) {
+	task = theTask;
+	return;
+}
+
 int Todo::getImportance() const{
     return importance;
+}
+
+void Todo::setImportance(int theImportance){
+	importance = theImportance;
+	return;
 }
 
 int Todo::getHeight() const{

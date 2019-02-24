@@ -49,9 +49,9 @@ class Todo{
         }
         
         
-        void setTask();                         // Set the task for current Todo Node
+        void setTask(string theTask);           // Set the task for current Todo Node
         string getTask() const;                 // Get the task string for current Todo Node
-        void setImportance();                   // Set the importance of this current Todo Node
+        void setImportance(int theImportance);  // Set the importance of this current Todo Node
         int getImportance() const;              // Set the importance of this current Todo Node 
         int getHeight() const;                  // Get the Height of the current Node(self included)
         void adjustHeight(stack<string> &path); // Set Height of the current Node *Do any Necessary rotations*

@@ -35,13 +35,12 @@ class Day {
         int monthNumber;
 	    int dayNumber;
         int numOfThings;
-        //Todo *todoRoot;
+        Todo *todoRoot;
         
         void deleteAll(Todo *todoNode);
         bool removeNode(const Todo* theNode);
         void addToFile(Todo *theTodo) const;                        // Helper function for set Event
     public:
-        Todo *todoRoot;
         /* Constructor */
         Day(int yearNum, int monthNum, int dayNum);
         ~Day(){

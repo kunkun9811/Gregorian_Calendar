@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 //testing
 #include <stack>
@@ -22,10 +23,20 @@ int main() {
     a.readDayFile();
     a.printByImportance();
 
-    // a.setEvent("new todo1", 2);
-    // a.setEvent("new todo2", 3);
-    // a.setEvent("new todo3", 1);
-    a.deleteEvent("new todo2");
+    a.setEvent("new todo1", 4);
+    a.setEvent("new todo2", 3);
+    a.setEvent("new todo3", 5);
+    a.setEvent("Sleep", 2);
+    a.setEvent("finish calendar coding", 3);
+    a.setEvent("Play games", 5);
+    a.setEvent("hang out with hanna", 1);
+    a.setEvent("hang out with joycelyn", 2);
+    a.setEvent("drink", 3);
+    a.setEvent("hang out with Jasmine", 1);
+    
+    string response = "finish calendar coding";
+    // a.deleteEvent("new todo1");
+    a.deleteEvent(response);
     a.printByImportance();
     
     
