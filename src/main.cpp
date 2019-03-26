@@ -34,9 +34,9 @@ int main() {
     a.setEvent("drink", 3);
     a.setEvent("hang out with Jasmine", 1);
     
-    string response = "finish calendar coding";
+    // string response = "finish calendar coding";
     // a.deleteEvent("new todo1");
-    a.deleteEvent(response);
+    // a.deleteEvent(response);
     a.printByImportance();
     
     

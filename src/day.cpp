@@ -133,7 +133,7 @@ bool Day::setEvent(const string &todoString, const int imp){
         return true;
     }
     else{
-        cout << "Please enter event or make sure Importance level is between 1 and 5" << endl;
+        cout << "Please enter an event or make sure Importance level is between 1 and 5" << endl;
         return false;
     }
     
