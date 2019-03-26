@@ -293,7 +293,7 @@ bool Day::removeNode(const Todo* theNode){
                 }
                 else if(nodeToDelete->rightTodo != NULL){
                     Todo* nodeToDeleteOldParent = nodeToDelete->parent;
-                    Todo* nodeToDeleteRightTodo = nodeToDelete->rightTodo;
+                    Todo* nodeToDeleteRightTodo = nodeToDelete->rightTodo;      // I did .... Todo* nodeToDeleteRightTodo = nodeToDeleteRightTodo;
                     if(nodeToDelete == nodeToDeleteOldParent->leftTodo){
                         nodeToDeleteOldParent->leftTodo = nodeToDeleteRightTodo;
                         nodeToDeleteRightTodo->parent = nodeToDeleteOldParent;
