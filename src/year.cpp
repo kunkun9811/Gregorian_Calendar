@@ -92,7 +92,7 @@ void Year::adjustHeight(stack<string> &path){
 
 void Year::rotateLeft(Year *top, stack<string> &path){
 	// Prevent rotating NULL 
-	cout << "I'm in rotateLeft" << endl;
+	// cout << "I'm in rotateLeft" << endl;
 	if(top == NULL) return;
 	
 	Year *oldTopParent = top->parent;
@@ -124,7 +124,7 @@ void Year::rotateLeft(Year *top, stack<string> &path){
 }
 
 void Year::rotateRight(Year *top, stack<string> &path){
-	cout << "I'm in rotateRight" << endl;
+	// cout << "I'm in rotateRight" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;
 	
@@ -157,7 +157,7 @@ void Year::rotateRight(Year *top, stack<string> &path){
 }
 
 void Year::rotateLeftKink(Year *top, stack<string> &path){
-	cout << "I'm in rotateLeftKink" << endl;
+	// cout << "I'm in rotateLeftKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	
@@ -182,7 +182,7 @@ void Year::rotateLeftKink(Year *top, stack<string> &path){
 }
 
 void Year::rotateRightKink(Year *top, stack<string> &path){
-	cout << "I'm in rotateRightKink" << endl;
+	// cout << "I'm in rotateRightKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	

@@ -23,20 +23,32 @@ int main() {
     a.readDayFile();
     a.printByImportance();
 
-    a.setEvent("new todo1", 4);
-    a.setEvent("new todo2", 3);
-    a.setEvent("new todo3", 5);
-    a.setEvent("Sleep", 2);
-    a.setEvent("finish calendar coding", 3);
-    a.setEvent("Play games", 5);
-    a.setEvent("hang out with hanna", 1);
-    a.setEvent("hang out with joycelyn", 2);
-    a.setEvent("drink", 3);
-    a.setEvent("hang out with Jasmine", 1);
+    // a.setEvent("new todo1", 4);
+    // a.setEvent("new todo2", 3);
+    // a.setEvent("new todo3", 5);
+    // a.setEvent("Sleep", 2);
+    // a.setEvent("finish calendar coding", 3);
+    // a.setEvent("Play games", 5);
+    // a.setEvent("hang out with hanna", 1);
+    // a.setEvent("hang out with joycelyn", 2);
+    // a.setEvent("drink", 3);
+    // a.setEvent("hang out with Jasmine", 1);
+    // a.setEvent("1_", 4);
+    // a.setEvent("2_", 3);
+    // a.setEvent("3_", 5);
+    // a.setEvent("4_", 2);
+    // a.setEvent("5_", 3);
+    // a.setEvent("6_", 5);
+    // a.setEvent("7_", 1);
+    // a.setEvent("8_", 2);
+    // a.setEvent("9_", 3);
+    // a.setEvent("10_", 1);
     
     // string response = "finish calendar coding";
     // a.deleteEvent("new todo1");
-    // a.deleteEvent(response);
+    // a.deleteEvent("hang out with hanna");
+    a.deleteEvent("1_");
+    a.deleteEvent("7_");
     a.printByImportance();
     
     

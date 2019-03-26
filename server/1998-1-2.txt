@@ -1,20 +1,16 @@
-4
-new todo1
 3
-new todo2
+2_
 5
-new todo3
+3_
 2
-Sleep
+4_
 3
-finish calendar coding
+5_
 5
-Play games
-1
-hang out with hanna
+6_
 2
-hang out with joycelyn
+8_
 3
-drink
+9_
 1
-hang out with Jasmine
+10_

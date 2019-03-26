@@ -182,9 +182,11 @@ bool Day::removeNode(const Todo* theNode){
                  * then connect that right child to the successor's old parent (which in this case would be the 'modified' nodeToDelete)
                  * Just like how you would do to the left most node of right subtree (aka any other successors)
                  */
+                 
+                 /* HERE , i think i deleted theSuccessor not the node to be deleted LOL */
                 if(theSuccessor->rightTodo != NULL){
                     // Set right node of theSuccessor to theSucOldParent (no matter what)
-                    theSuccessor->rightTodo->parent = theSucOldParent;
+                    theSuccessor->rightTodo->parent = theSucOldParent;                      
                     
                     // If successor is the imeediate right node of nodeToDelete
                     if(theSuccessor == nodeToDelete->rightTodo) {
@@ -291,7 +293,7 @@ bool Day::removeNode(const Todo* theNode){
                 }
                 else if(nodeToDelete->rightTodo != NULL){
                     Todo* nodeToDeleteOldParent = nodeToDelete->parent;
-                    Todo* nodeToDeleteRightTodo = nodeToDeleteRightTodo;
+                    Todo* nodeToDeleteRightTodo = nodeToDelete->rightTodo;
                     if(nodeToDelete == nodeToDeleteOldParent->leftTodo){
                         nodeToDeleteOldParent->leftTodo = nodeToDeleteRightTodo;
                         nodeToDeleteRightTodo->parent = nodeToDeleteOldParent;
@@ -400,8 +402,9 @@ bool Day::deleteEvent(const string &todoString){
             
             // Create temporary Todo Node to traverse Tree
             Todo* tempTodo = new Todo(theTodo, theImp);
-            removeNode(tempTodo);
             // cout << "I'm here" << endl;
+            removeNode(tempTodo);
+            // cout << "I'm here1" << endl;
             delete tempTodo;            // deallocate tempTodo
             return true;
         }
