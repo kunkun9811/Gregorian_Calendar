@@ -55,6 +55,8 @@ int main() {
     // a.deleteEvent("7_");
     // a.deleteEvent("2_");
     // a.deleteEvent("4_");
+    
+    
     cout << "What would you like to delete" << endl;
     string response;
     getline(cin, response);
@@ -63,7 +65,9 @@ int main() {
         a.printByImportance();
         getline(cin, response);
     }
-    // a.printByImportance();
+    
+    
+    a.printByImportance();
     // 5 6 3 2
     
     return 0;

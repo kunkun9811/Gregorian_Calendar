@@ -53,14 +53,21 @@ class Todo{
         string getTask() const;                 // Get the task string for current Todo Node
         void setImportance(int theImportance);  // Set the importance of this current Todo Node
         int getImportance() const;              // Set the importance of this current Todo Node 
+        void setHeight(int theHeight);
         int getHeight() const;                  // Get the Height of the current Node(self included)
-        void adjustHeight(stack<string> &path); // Set Height of the current Node *Do any Necessary rotations*
+        // void adjustHeight(stack<string> &path); // Set Height of the current Node *Do any Necessary rotations*
+        int adjustHeight();
+        int getBalance() const;
         
         /* Rotations to balanace the Todo tree */
-		void rotateLeft(Todo *theNode, stack<string> &path);
-		void rotateRight(Todo *theNode, stack<string> &path);
-		void rotateLeftKink(Todo *theNode, stack<string> &path);
-		void rotateRightKink(Todo *theNode, stack<string> &path);
+// 		void rotateLeft(Todo *theNode, stack<string> &path);
+// 		void rotateRight(Todo *theNode, stack<string> &path);
+// 		void rotateLeftKink(Todo *theNode, stack<string> &path);
+// 		void rotateRightKink(Todo *theNode, stack<string> &path);
+		void rotateLeft(Todo *theNode);
+		void rotateRight(Todo *theNode);
+		void rotateLeftKink(Todo *theNode);
+		void rotateRightKink(Todo *theNode);
                 
         Todo* getSuccessor();                   // Get the successor of current Node (Used when a todo is deleted)
         //bool operator<(const Todo& other);    // Overriding less than operator for the purpose of min-heap data structure
