@@ -14,7 +14,11 @@
 using namespace std;
 
 
-/* GOING TO START THE REMOVE TODO NODE AT DAY.CPP FOR DELETING EVENT */
+/* TASK:
+ *  (1) I need to adjustHeight in cases in day.cpp where it's not nodeToDelete with two children
+ *
+ *
+ */
 int main() {
     
     cout << "Calendar" << endl;
@@ -33,24 +37,34 @@ int main() {
     // a.setEvent("hang out with joycelyn", 2);
     // a.setEvent("drink", 3);
     // a.setEvent("hang out with Jasmine", 1);
-    // a.setEvent("1_", 4);
-    // a.setEvent("2_", 3);
-    // a.setEvent("3_", 5);
-    // a.setEvent("4_", 2);
-    // a.setEvent("5_", 3);
-    // a.setEvent("6_", 5);
-    // a.setEvent("7_", 1);
-    // a.setEvent("8_", 2);
-    // a.setEvent("9_", 3);
-    // a.setEvent("10_", 1);
+    a.setEvent("1_", 4);
+    a.setEvent("2_", 3);
+    a.setEvent("3_", 5);
+    a.setEvent("4_", 2);
+    a.setEvent("5_", 3);
+    a.setEvent("6_", 5);
+    a.setEvent("7_", 1);
+    a.setEvent("8_", 2);
+    a.setEvent("9_", 3);
+    a.setEvent("10_", 1);
     
     // string response = "finish calendar coding";
     // a.deleteEvent("new todo1");
     // a.deleteEvent("hang out with hanna");
-    a.deleteEvent("1_");
-    a.deleteEvent("7_");
-    a.printByImportance();
-    
+    // a.deleteEvent("1_");
+    // a.deleteEvent("7_");
+    // a.deleteEvent("2_");
+    // a.deleteEvent("4_");
+    cout << "What would you like to delete" << endl;
+    string response;
+    getline(cin, response);
+    while(response != "n"){
+        a.deleteEvent(response);
+        a.printByImportance();
+        getline(cin, response);
+    }
+    // a.printByImportance();
+    // 5 6 3 2
     
     return 0;
 }

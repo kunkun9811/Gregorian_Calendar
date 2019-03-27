@@ -93,7 +93,7 @@ void Todo::adjustHeight(stack<string> &path){
 
 void Todo::rotateLeft(Todo *top, stack<string> &path){
 	// Prevent rotating NULL 
-	// cout << "I'm in rotateLeft" << endl;
+	cout << "I'm in rotateLeft" << endl;
 	if(top == NULL) return;
 	
 	Todo *oldTopParent = top->parent;
@@ -125,7 +125,7 @@ void Todo::rotateLeft(Todo *top, stack<string> &path){
 }
 
 void Todo::rotateRight(Todo *top, stack<string> &path){
-	// cout << "I'm in rotateRight" << endl;
+	cout << "I'm in rotateRight" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;
 	
@@ -158,7 +158,7 @@ void Todo::rotateRight(Todo *top, stack<string> &path){
 }
 
 void Todo::rotateLeftKink(Todo *top, stack<string> &path){
-	// cout << "I'm in rotateLeftKink" << endl;
+	cout << "I'm in rotateLeftKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	
@@ -183,7 +183,7 @@ void Todo::rotateLeftKink(Todo *top, stack<string> &path){
 }
 
 void Todo::rotateRightKink(Todo *top, stack<string> &path){
-	// cout << "I'm in rotateRightKink" << endl;
+	cout << "I'm in rotateRightKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	

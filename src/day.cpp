@@ -164,6 +164,8 @@ bool Day::removeNode(const Todo* theNode){
             if(nodeToDelete->leftTodo != NULL && nodeToDelete->rightTodo != NULL){
                 Todo* theSuccessor = nodeToDelete->getSuccessor();
                 Todo* theSucOldParent = theSuccessor->parent;              // Later we traverse from theSuccessor's parent to the top and adjustHeight() for each Node encountered
+                // cout << "Thesuccesor " << theSuccessor->getTask() << endl;
+                // cout << "First the suc old parent " << theSuccessor->parent->getTask() << endl;
                 // if(theSuccessor != nodeToDelete->rightTodo){      
                 //     if(theSuccessor == theSuccessor->parent->leftTodo) theSuccessor->parent->leftTodo = NULL;
                 //     else theSuccessor->parent->rightTodo = NULL;
@@ -210,7 +212,7 @@ bool Day::removeNode(const Todo* theNode){
                 nodeToDelete->setTask(theSuccessor->getTask());
                 nodeToDelete->setImportance(theSuccessor->getImportance());
                 delete theSuccessor;
-                
+                // I NEED TO CHANGE HEIGHT
                 
                 // FIRST CHECK IF PARENT IS NULL, IF NOT, PRECEDE
                 // Check if nodeToDelete is its parent's leftTodo or rightTodo. If is its leftTodo, set nodeToDelete's parent's leftTodo to theSuccessor
@@ -223,11 +225,14 @@ bool Day::removeNode(const Todo* theNode){
                 // delete nodeToDelete;        // delete nodeToDelete
                 
                 // Adjust Height starting from the Successor's original parent - Because that's the bottom most node that had its subtrees modified. Anything lower than it has nothing changed.
+                // cout << "SucOldParent" << theSucOldParent->getTask() << endl;
                 Todo* nodeToAdjust = theSucOldParent;
                 stack<string> path;         // There's no need for path stack here. It is for function calling
                 int LHeight = 0;
                 int RHeight = 0;
                 //int flag = 0;           // Flag to see if root is checked and going to the left subtree of root. when AFTER checking root(flag = 1), change from checking RR and RL to LL and LR
+                // if (nodeToAdjust == NULL) cout << "NODETOADJUST IS NULL" << endl;
+                // else cout << "NODETOADJUST IS NOT NULL" << endl;
                 while(nodeToAdjust != NULL){
                     /* Adjust Height for Remove */
                     
@@ -238,9 +243,15 @@ bool Day::removeNode(const Todo* theNode){
                     if(nodeToAdjust->rightTodo == NULL) RHeight = 0;
                     else RHeight = nodeToAdjust->rightTodo->getHeight();
                     
+                    // cout << "node: " << nodeToAdjust->getTask() << endl;
+                    // cout << "L: " << LHeight << endl;
+                    // cout << "R: " << RHeight << endl;
+                    
                     if(abs(LHeight - RHeight) > 1){
+                        // cout << "********I'm here in checking**********" << endl;
                         if(RHeight > LHeight){          // Have not reached root yet
                             if(nodeToAdjust->rightTodo != NULL){                    // RR
+                            // cout << "I'm here in RR RL" << endl;
                                 if(nodeToAdjust->rightTodo->rightTodo != NULL){
                                     nodeToAdjust->rotateLeft(nodeToAdjust, path);
                                 }
@@ -251,10 +262,13 @@ bool Day::removeNode(const Todo* theNode){
                         }
                         else{   // LHeight > RHeihgt
                             if(nodeToAdjust->leftTodo != NULL){ 
+                                // cout << "I'm in LL LR" << endl;
                                 if(nodeToAdjust->leftTodo->leftTodo != NULL){           // LL 
+                                    // cout << "I'm here ahha" << endl;
                                     nodeToAdjust->rotateRight(nodeToAdjust, path);
                                 }
                                 else if(nodeToAdjust->leftTodo->rightTodo != NULL){     // LR
+                                    // cout << "I'm hella here" << endl;
                                     nodeToAdjust->rotateRightKink(nodeToAdjust, path);
                                 }
                             }
@@ -281,15 +295,16 @@ bool Day::removeNode(const Todo* theNode){
                         nodeToDeleteLeftTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
                         numOfThings--;
-                        return true;
+                        // return true; I didn't change height
                     }
                     else{
                         nodeToDeleteOldParent->rightTodo = nodeToDeleteLeftTodo;
                         nodeToDeleteLeftTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
                         numOfThings--;
-                        return true;
+                        // return true;
                     }
+                    
                 }
                 else if(nodeToDelete->rightTodo != NULL){
                     Todo* nodeToDeleteOldParent = nodeToDelete->parent;
