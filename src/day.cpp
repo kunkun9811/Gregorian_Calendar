@@ -157,7 +157,6 @@ bool Day::setEvent(const string &todoString, const int imp){
  *                  (b) If theNode's importance is greater or equal to nodeToDelete's (or currNode's) importance, traverse right subtree
  */
 bool Day::removeNode(const Todo* theNode){
-    if(theNode == NULL) cout << "theNode is NULL" << endl;
     Todo* nodeToDelete = todoRoot;
     while(nodeToDelete != NULL){
         if(theNode->getTask() == nodeToDelete->getTask()){
@@ -204,52 +203,60 @@ bool Day::removeNode(const Todo* theNode){
                 delete theSuccessor;
                
                 Todo* nodeToAdjust = theSucOldParent;
-                stack<string> path;         // There's no need for path stack here. It is for function calling
-                int LHeight = 0;
-                int RHeight = 0;
+                Todo* prevTodo = NULL;
+                // stack<string> path;         // There's no need for path stack here. It is for function calling
+                // int LHeight = 0;
+                // int RHeight = 0;
                 
-                while(nodeToAdjust != NULL){
-                    /* Adjust Height for Remove */
+                // while(nodeToAdjust != NULL){
+                //     /* Adjust Height for Remove */
                     
-                    // Check if Tree is unbalanced
-                    if(nodeToAdjust->leftTodo == NULL) LHeight = 0;
-                    else LHeight = nodeToAdjust->leftTodo->getHeight();
+                //     // Check if Tree is unbalanced
+                //     if(nodeToAdjust->leftTodo == NULL) LHeight = 0;
+                //     else LHeight = nodeToAdjust->leftTodo->getHeight();
                     
-                    if(nodeToAdjust->rightTodo == NULL) RHeight = 0;
-                    else RHeight = nodeToAdjust->rightTodo->getHeight();
+                //     if(nodeToAdjust->rightTodo == NULL) RHeight = 0;
+                //     else RHeight = nodeToAdjust->rightTodo->getHeight();
                     
-                    if(abs(LHeight - RHeight) > 1){
-                        // cout << "********I'm here in checking**********" << endl;
-                        if(RHeight > LHeight){          // Have not reached root yet
-                            if(nodeToAdjust->rightTodo != NULL){                    // RR
-                            // cout << "I'm here in RR RL" << endl;
-                                if(nodeToAdjust->rightTodo->rightTodo != NULL){
-                                    nodeToAdjust->rotateLeft(nodeToAdjust);
-                                }
-                                else if(nodeToAdjust->rightTodo->leftTodo != NULL){ // RL
-                                    nodeToAdjust->rotateLeftKink(nodeToAdjust);
-                                }
-                            }
-                        }
-                        else{   // LHeight > RHeihgt
-                            if(nodeToAdjust->leftTodo != NULL){ 
-                                // cout << "I'm in LL LR" << endl;
-                                if(nodeToAdjust->leftTodo->leftTodo != NULL){           // LL 
-                                    // cout << "I'm here ahha" << endl;
-                                    nodeToAdjust->rotateRight(nodeToAdjust);
-                                }
-                                else if(nodeToAdjust->leftTodo->rightTodo != NULL){     // LR
-                                    // cout << "I'm hella here" << endl;
-                                    nodeToAdjust->rotateRightKink(nodeToAdjust);
-                                }
-                            }
-                        }
-                    }
-                    /* After everything is adjusted, Fix the height of the current Node to above */
-                    // Again, the stack 'path' has nothing to do with function, it's just for the sake of function calling
+                //     if(abs(LHeight - RHeight) > 1){
+                //         // cout << "********I'm here in checking**********" << endl;
+                //         if(RHeight > LHeight){          // Have not reached root yet
+                //             if(nodeToAdjust->rightTodo != NULL){                    // RR
+                //             // cout << "I'm here in RR RL" << endl;
+                //                 if(nodeToAdjust->rightTodo->rightTodo != NULL){
+                //                     nodeToAdjust->rotateLeft(nodeToAdjust);
+                //                 }
+                //                 else if(nodeToAdjust->rightTodo->leftTodo != NULL){ // RL
+                //                     nodeToAdjust->rotateLeftKink(nodeToAdjust);
+                //                 }
+                //             }
+                //         }
+                //         else{   // LHeight > RHeihgt
+                //             if(nodeToAdjust->leftTodo != NULL){ 
+                //                 // cout << "I'm in LL LR" << endl;
+                //                 if(nodeToAdjust->leftTodo->leftTodo != NULL){           // LL 
+                //                     // cout << "I'm here ahha" << endl;
+                //                     nodeToAdjust->rotateRight(nodeToAdjust);
+                //                 }
+                //                 else if(nodeToAdjust->leftTodo->rightTodo != NULL){     // LR
+                //                     // cout << "I'm hella here" << endl;
+                //                     nodeToAdjust->rotateRightKink(nodeToAdjust);
+                //                 }
+                //             }
+                //         }
+                //     }
+                //     /* After everything is adjusted, Fix the height of the current Node to above */
+                //     // Again, the stack 'path' has nothing to do with function, it's just for the sake of function calling
+                //     nodeToAdjust->adjustHeight();
+                //     nodeToAdjust = nodeToAdjust->parent;
+                // }
+                while(nodeToAdjust){
                     nodeToAdjust->adjustHeight();
+                    prevTodo = nodeToAdjust;
                     nodeToAdjust = nodeToAdjust->parent;
                 }
+                if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                todoRoot = prevTodo;
                 numOfThings--;
                 return true;
             }
@@ -261,7 +268,13 @@ bool Day::removeNode(const Todo* theNode){
                 if(nodeToDelete->leftTodo != NULL){
                     Todo* nodeToDeleteOldParent = nodeToDelete->parent;
                     Todo* nodeToDeleteLeftTodo = nodeToDelete->leftTodo;
-                    if(nodeToDelete == nodeToDeleteOldParent->leftTodo){
+                    if(nodeToDeleteOldParent == NULL){   // nodeToDelete is root node
+                        todoRoot = nodeToDeleteLeftTodo;
+                        nodeToDeleteLeftTodo->parent = NULL;
+                        delete nodeToDelete;
+                        numOfThings--;
+                    }
+                    else if(nodeToDelete == nodeToDeleteOldParent->leftTodo){
                         nodeToDeleteOldParent->leftTodo = nodeToDeleteLeftTodo;
                         nodeToDeleteLeftTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
@@ -277,15 +290,25 @@ bool Day::removeNode(const Todo* theNode){
                     }
                     
                     Todo* currTodo = nodeToDeleteLeftTodo;
+                    Todo* prevTodo = NULL;
                     while(currTodo){
                         currTodo->adjustHeight();
+                        prevTodo = currTodo;
                         currTodo = currTodo->parent;
                     }
+                    if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                    todoRoot = prevTodo;
                 }
                 else if(nodeToDelete->rightTodo != NULL){
                     Todo* nodeToDeleteOldParent = nodeToDelete->parent;
                     Todo* nodeToDeleteRightTodo = nodeToDelete->rightTodo;      // I did .... Todo* nodeToDeleteRightTodo = nodeToDeleteRightTodo;
-                    if(nodeToDelete == nodeToDeleteOldParent->leftTodo){
+                    if(nodeToDeleteOldParent == NULL){      // if nodeToDelete is root node
+                        todoRoot = nodeToDeleteRightTodo;
+                        nodeToDeleteRightTodo->parent = NULL;
+                        delete nodeToDelete;
+                        numOfThings--;
+                    }
+                    else if(nodeToDelete == nodeToDeleteOldParent->leftTodo){
                         nodeToDeleteOldParent->leftTodo = nodeToDeleteRightTodo;
                         nodeToDeleteRightTodo->parent = nodeToDeleteOldParent;
                         delete nodeToDelete;
@@ -301,10 +324,14 @@ bool Day::removeNode(const Todo* theNode){
                     }
                     
                     Todo* currTodo = nodeToDeleteRightTodo;
+                    Todo* prevTodo = NULL;
                     while(currTodo){
                         currTodo->adjustHeight();
+                        prevTodo = currTodo;
                         currTodo = currTodo->parent;
                     }
+                    if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                    todoRoot = prevTodo;
                 }
                 return true;
             }
@@ -312,7 +339,12 @@ bool Day::removeNode(const Todo* theNode){
             /* Node To delete has no children */
             else if(nodeToDelete->leftTodo == NULL && nodeToDelete->rightTodo == NULL){
                 Todo* toDeleteParent = nodeToDelete->parent;
-                if(nodeToDelete == nodeToDelete->parent->leftTodo) {
+                if(toDeleteParent == NULL){     // If nodeToDelete is root node
+                    todoRoot = NULL;
+                    delete nodeToDelete;
+                    numOfThings--;
+                }
+                else if(nodeToDelete == nodeToDelete->parent->leftTodo) {
                     toDeleteParent->leftTodo = NULL;
                     delete nodeToDelete;
                     numOfThings--;
@@ -326,10 +358,14 @@ bool Day::removeNode(const Todo* theNode){
                 }
                 
                 Todo* currTodo = toDeleteParent;
+                Todo* prevTodo = NULL;
                 while(currTodo){
                     currTodo->adjustHeight();
+                    prevTodo = currTodo;
                     currTodo = currTodo->parent;
                 }
+                if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                todoRoot = prevTodo;
                 return true;
             }
         }
@@ -365,6 +401,7 @@ bool Day::deleteEvent(const string &todoString){
             impVector.push_back(stoi(imp));
             todoVector.push_back(todo);
         }
+        fileToRemoveFrom.close();
         // Traverse the array to find and delete
         bool elementRemoved = false;                // Flag that shows if an element is removed, if not, it means the element was not in the file
         for(int i = 0; i < todoVector.size(); i++){
@@ -386,7 +423,6 @@ bool Day::deleteEvent(const string &todoString){
             outToFile.open(fileName, ios_base::out | ios_base::trunc);           // To clear file
             if(!outToFile.is_open()){
                 cout << "Could not write to the file. Error removing the event. Try Again." << endl;
-                fileToRemoveFrom.close();               // close the input file
                 return false;
             }
             else{
@@ -403,11 +439,13 @@ bool Day::deleteEvent(const string &todoString){
                 outToFile << oss.str();
                 outToFile.close();
             }
-            fileToRemoveFrom.close();                   // close the input file
             outToFile.close();                          // close the output file
             
             // Create temporary Todo Node to traverse Tree
             Todo* tempTodo = new Todo(theTodo, theImp);
+            // if(tempTodo->parent == NULL) cout << "parent is null" << endl;
+            // if(tempTodo->rightTodo == NULL) cout << "rightTodo is null" << endl;
+            // if(tempTodo->leftTodo == NULL) cout << "leftTodo is null" << endl;
             // cout << "I'm here" << endl;
             removeNode(tempTodo);
             // cout << "I'm here1" << endl;
@@ -509,9 +547,12 @@ bool Day::insertTodo(const string &todoString, const int imp){
 }
 
 void Day::printByImportance() const{
+    cout << "______________________________________________________" << endl;
     printf("NUMBER OF TASKS(%d/%d/%d) = %d \n\n", yearNumber, monthNumber, dayNumber, numOfThings);
     cout << "*Sorted by Importance*" << endl;
     int i = 1;
+    // if(todoRoot != NULL) cout << "****** TODO ROOT ********" << todoRoot->getTask() << endl;
+    // else cout << "TODOROOT IS NULL" << endl;
     inorder(todoRoot, i);
     return;
 }

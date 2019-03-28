@@ -48,6 +48,8 @@ int main() {
     a.setEvent("9_", 3);
     a.setEvent("10_", 1);
     
+    a.printByImportance();
+    
     // string response = "finish calendar coding";
     // a.deleteEvent("new todo1");
     // a.deleteEvent("hang out with hanna");

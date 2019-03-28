@@ -118,9 +118,11 @@ int Todo::adjustHeight() {
 			if(theLeftTodo->rightTodo != NULL) rightH = theLeftTodo->rightTodo->getHeight();
 			
 			if(leftH >= rightH){ //LL
+				cout << "Rotating at " << this->getTask() << endl;
 				rotateRight(this);
 			}
 			else{
+				cout << "Rotating at " << this->getTask() << endl;
 				rotateRightKink(this);
 			}
 		}
@@ -129,9 +131,11 @@ int Todo::adjustHeight() {
 		if(theRightTodo->leftTodo != NULL) leftH = theRightTodo->leftTodo->getHeight();
 		if(theRightTodo->rightTodo != NULL) rightH = theRightTodo->rightTodo->getHeight();
 			if(rightH >= leftH){
+				cout << "Rotating at " << this->getTask() << endl;
 				rotateLeft(this);
 			}
 			else{
+				cout << "Rotating at " << this->getTask() << endl;
 				rotateLeftKink(this);
 			}
 		}
