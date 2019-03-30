@@ -19,60 +19,19 @@ using namespace std;
  *
  *
  */
+void printCalendar(int year); 
+
 int main() {
     
     cout << "Calendar" << endl;
 
-    Day a(1998, 1, 2);
-    a.readDayFile();
-    a.printByImportance();
-
-    // a.setEvent("new todo1", 4);
-    // a.setEvent("new todo2", 3);
-    // a.setEvent("new todo3", 5);
-    // a.setEvent("Sleep", 2);
-    // a.setEvent("finish calendar coding", 3);
-    // a.setEvent("Play games", 5);
-    // a.setEvent("hang out with hanna", 1);
-    // a.setEvent("hang out with joycelyn", 2);
-    // a.setEvent("drink", 3);
-    // a.setEvent("hang out with Jasmine", 1);
-    a.setEvent("1_", 4);
-    a.setEvent("2_", 3);
-    a.setEvent("3_", 5);
-    a.setEvent("4_", 2);
-    a.setEvent("5_", 3);
-    a.setEvent("6_", 5);
-    a.setEvent("7_", 1);
-    a.setEvent("8_", 2);
-    a.setEvent("9_", 3);
-    a.setEvent("10_", 1);
     
-    a.printByImportance();
-    
-    // string response = "finish calendar coding";
-    // a.deleteEvent("new todo1");
-    // a.deleteEvent("hang out with hanna");
-    // a.deleteEvent("1_");
-    // a.deleteEvent("7_");
-    // a.deleteEvent("2_");
-    // a.deleteEvent("4_");
-    
-    
-    cout << "What would you like to delete" << endl;
-    string response;
-    getline(cin, response);
-    while(response != "n"){
-        a.deleteEvent(response);
-        a.printByImportance();
-        getline(cin, response);
-    }
-    
-    
-    a.printByImportance();
-    // 5 6 3 2
     
     return 0;
+}
+
+void printCalendar(int year){
+    
 }
 
 /* GAGDETS I CAN USE */
@@ -88,6 +47,56 @@ int main() {
 // Time of when the thing is happening !!!!!!!!
 // I NEED TO NOT USE getline WHEN READING THE FILES. **DELETE EVENT AND DAY FILE IN DAY.CPP*
     // NEED TO ALSO ADD DESCRIPTION, INSTEAD OF JUST TITLES
+    
+/* TESTING SETTING EVENT ON DAY.CPP */
+//     Day a(1998, 1, 2);
+//     a.readDayFile();
+//     a.printByImportance();
+
+//     // a.setEvent("new todo1", 4);
+//     // a.setEvent("new todo2", 3);
+//     // a.setEvent("new todo3", 5);
+//     // a.setEvent("Sleep", 2);
+//     // a.setEvent("finish calendar coding", 3);
+//     // a.setEvent("Play games", 5);
+//     // a.setEvent("hang out with hanna", 1);
+//     // a.setEvent("hang out with joycelyn", 2);
+//     // a.setEvent("drink", 3);
+//     // a.setEvent("hang out with Jasmine", 1);
+//     a.setEvent("1_", 4);
+//     a.setEvent("2_", 3);
+//     a.setEvent("3_", 5);
+//     a.setEvent("4_", 2);
+//     a.setEvent("5_", 3);
+//     a.setEvent("6_", 5);
+//     a.setEvent("7_", 1);
+//     a.setEvent("8_", 2);
+//     a.setEvent("9_", 3);
+//     a.setEvent("10_", 1);
+    
+//     a.printByImportance();
+    
+//     // string response = "finish calendar coding";
+//     // a.deleteEvent("new todo1");
+//     // a.deleteEvent("hang out with hanna");
+//     // a.deleteEvent("1_");
+//     // a.deleteEvent("7_");
+//     // a.deleteEvent("2_");
+//     // a.deleteEvent("4_");
+    
+    
+//     cout << "What would you like to delete" << endl;
+//     string response;
+//     getline(cin, response);
+//     while(response != "n"){
+//         a.deleteEvent(response);
+//         a.printByImportance();
+//         getline(cin, response);
+//     }
+    
+    
+//     a.printByImportance();
+//     // 5 6 3 2
 
 /* Testing code for inserting */
     // a.insertTodo("Wash Dishes", 3);
