@@ -44,6 +44,7 @@ class Year{
 		void setYearNumber(int yearNum);
 		unsigned int getHeight();
 		void adjustHeight(stack<string> &path);
+		Month* getMonth(int monthNum) const;
 		
 };
 

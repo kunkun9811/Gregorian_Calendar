@@ -19,20 +19,19 @@ using namespace std;
  *
  *
  */
-void printCalendar(int year); 
-
+ 
+// I changed a insertYear in calendar.cpp
 int main() {
     
     cout << "Calendar" << endl;
 
-    
+    Calendar a;
+    a.printCalendar(1968);
     
     return 0;
 }
 
-void printCalendar(int year){
-    
-}
+
 
 /* GAGDETS I CAN USE */
 // system("cls") - clear screen

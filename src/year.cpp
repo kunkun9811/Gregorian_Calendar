@@ -14,7 +14,7 @@ Year::Year(const int yearNum){
 	leftYear = rightYear = parent = NULL;
 	months.resize(12);
 	for(int i = 0; i < months.size(); i++){				
-		months.at(i) = new Month(i+1, yearNumber);
+		months.at(i) = new Month(yearNumber, i+1);
 	}
 }
 
@@ -88,6 +88,10 @@ void Year::adjustHeight(stack<string> &path){
 	this->height = max(LHeight, RHeight) + 1;
 	
 	return;
+}
+
+Month* Year::getMonth(int monthNum) const{
+	return months.at(monthNum - 1);
 }
 
 void Year::rotateLeft(Year *top, stack<string> &path){

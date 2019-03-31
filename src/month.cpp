@@ -3,7 +3,9 @@
 #include "month.hpp"
 #include "year.hpp"
 
-Month::Month(const int &monthNum, const int &yearNum){
+Month::Month(const int &yearNum, const int &monthNum){
+	yearNumber = yearNum;
+	
 	if(monthNum == 1){
 		days.resize(31);	
 	}

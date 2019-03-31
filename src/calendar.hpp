@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "year.hpp"
 
@@ -65,13 +66,17 @@ class Calendar {
    	    ~Calendar(){
    	        deleteAll(yearRoot);
    	    }
-   	    bool insertYear(int yearNum);
-   	    Year *getYearRoot() const;
+   	    Year* insertYear(int yearNum);
+   	    Year* getYearRoot() const;
    	    void printYear();
    	    void printMonth();
    	    void printTodos() const;
    	    bool setEvent() const;
    	    bool year_Exist() const;
+   	    int monthNumDays(const int &yearNum, const int &monthNum);
+   	    string monthName(const int &monthNum);
+   	    int dayOfWeek(int y, int m, int d);
+   	    void printCalendar(int year);
    	    
    	    // Just to test tree, PRINT TREE
    	    void inorder(Year *yearNode) const;
