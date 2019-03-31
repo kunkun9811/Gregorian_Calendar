@@ -4,6 +4,10 @@
 
 #include "calendar.hpp"
 
+#define underline "\e[4m"                 //underline code
+#define cyan "\e[96m"
+#define reset "\e[0m"
+
 using namespace std;
 
 void Calendar::inorder(Year *yearNode) const{
@@ -165,8 +169,9 @@ void Calendar::printCalendar(int year){
     Year* currYear = insertYear(year);
     // int currMonth = monthNumDays(year, month);
     Month* currMonth = NULL;
+    Day* currDay = NULL;
+    int currDayNum = dayOfWeek(year, 1, 1);
     int monthDays = 0;
-    int currDay = dayOfWeek(year, 1, 1);
 
     for(int i = 0; i < 12; i++){
         currMonth = currYear->getMonth(i+1);
@@ -175,12 +180,21 @@ void Calendar::printCalendar(int year){
         printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
         
         int j = 0;
-        for(j = 0; j < currDay; j++){       // print spaces
+        for(j = 0; j < currDayNum; j++){       // print spaces
             printf("     ");
         }
 
         for(int k = 1; k <= monthDays; k++){
-            printf("%5d", k);
+            currDay = currMonth->getDay(k);
+            if(currDay) {
+                // cout << "I'm here" << endl;
+                if(currDay->getNumOfThings() > 0){
+                    // cout << "I'm here 1" << endl;
+                    printf(cyan "%5d" reset, k);
+                }
+                else printf("%5d", k);
+            }
+            else printf("%5d", k);
             
             if(++j > 6){ // meaning we just printed the day for Sat, need to go to next line
                 j = 0;
@@ -192,7 +206,7 @@ void Calendar::printCalendar(int year){
         if(j) 
             cout << endl;     // will reach here if we finished printing all days in currentMonth but still need to print another newline for next month
                 
-        currDay = j;
+        currDayNum = j;
     }
     return;
 }

@@ -17,6 +17,7 @@ Day::Day(int yearNum, int monthNum, int dayNum){
     dayNumber = dayNum;
     numOfThings = 0;
     todoRoot = NULL;
+    readDayFile();
 }
 
 // this is a test must delete

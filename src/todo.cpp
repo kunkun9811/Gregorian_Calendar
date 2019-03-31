@@ -118,11 +118,11 @@ int Todo::adjustHeight() {
 			if(theLeftTodo->rightTodo != NULL) rightH = theLeftTodo->rightTodo->getHeight();
 			
 			if(leftH >= rightH){ //LL
-				cout << "Rotating at " << this->getTask() << endl;
+				// cout << "Rotating at " << this->getTask() << endl;
 				rotateRight(this);
 			}
 			else{
-				cout << "Rotating at " << this->getTask() << endl;
+				// cout << "Rotating at " << this->getTask() << endl;
 				rotateRightKink(this);
 			}
 		}
@@ -131,11 +131,11 @@ int Todo::adjustHeight() {
 		if(theRightTodo->leftTodo != NULL) leftH = theRightTodo->leftTodo->getHeight();
 		if(theRightTodo->rightTodo != NULL) rightH = theRightTodo->rightTodo->getHeight();
 			if(rightH >= leftH){
-				cout << "Rotating at " << this->getTask() << endl;
+				// cout << "Rotating at " << this->getTask() << endl;
 				rotateLeft(this);
 			}
 			else{
-				cout << "Rotating at " << this->getTask() << endl;
+				// cout << "Rotating at " << this->getTask() << endl;
 				rotateLeftKink(this);
 			}
 		}
@@ -156,7 +156,7 @@ int Todo::getBalance() const {
 
 void Todo::rotateLeft(Todo *top){
 	// Prevent rotating NULL 
-	cout << "I'm in rotateLeft" << endl;
+	// cout << "I'm in rotateLeft" << endl;
 	if(top == NULL) return;
 	
 	Todo *oldTopParent = top->parent;
@@ -188,7 +188,7 @@ void Todo::rotateLeft(Todo *top){
 }
 
 void Todo::rotateRight(Todo *top){
-	cout << "I'm in rotateRight" << endl;
+	// cout << "I'm in rotateRight" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;
 	
@@ -221,7 +221,7 @@ void Todo::rotateRight(Todo *top){
 }
 
 void Todo::rotateLeftKink(Todo *top){
-	cout << "I'm in rotateLeftKink" << endl;
+	// cout << "I'm in rotateLeftKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	
@@ -246,7 +246,7 @@ void Todo::rotateLeftKink(Todo *top){
 }
 
 void Todo::rotateRightKink(Todo *top){
-	cout << "I'm in rotateRightKink" << endl;
+	// cout << "I'm in rotateRightKink" << endl;
 	// Prevent rotating NULL
 	if(top == NULL) return;	
 	

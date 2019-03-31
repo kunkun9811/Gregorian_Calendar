@@ -5,6 +5,7 @@
 
 Month::Month(const int &yearNum, const int &monthNum){
 	yearNumber = yearNum;
+	monthNumber = monthNum;
 	
 	if(monthNum == 1){
 		days.resize(31);	
@@ -48,6 +49,15 @@ Month::Month(const int &yearNum, const int &monthNum){
 	else{
 		cout << "Invalid Month Number" << endl;
 	}
+
+	for(int i = 0; i < days.size(); i++){
+		days.at(i) = new Day(yearNumber, monthNumber, i + 1);
+	}
+}
+
+Day* Month::getDay(const int &dayNum) const{
+	Day* theDay = days.at(dayNum - 1);
+	return theDay;
 }
 
 bool Month::isLeapYear() const {

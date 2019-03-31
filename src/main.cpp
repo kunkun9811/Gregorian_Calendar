@@ -5,10 +5,6 @@
 //testing
 #include <stack>
 
-#define underline "\e[4m"                 //underline code
-#define cyan "\e[96m"
-#define reset "\e[0m"
-
 #include "calendar.hpp"
 
 using namespace std;
@@ -26,7 +22,7 @@ int main() {
     cout << "Calendar" << endl;
 
     Calendar a;
-    a.printCalendar(1968);
+    a.printCalendar(1998);
     
     return 0;
 }

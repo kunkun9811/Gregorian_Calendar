@@ -15,6 +15,7 @@ class Month{
         vector<Day*> days;
     public:
         Month(const int &yearNum, const int &monthNum);
+        Day* getDay(const int &dayNum) const;
         bool isLeapYear() const;
 };
 
