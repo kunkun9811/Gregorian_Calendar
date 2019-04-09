@@ -24,10 +24,10 @@ class Year{
 		int yearNumber;							// This year's number
 		int height;								// This year node's height in the AVL Tree
 		vector<Month*> months;	
-		void rotateLeft(Year *theNode, stack<string> &path);
-		void rotateRight(Year *theNode, stack<string> &path);
-		void rotateLeftKink(Year *theNode, stack<string> &path);
-		void rotateRightKink(Year *theNode, stack<string> &path);
+		void rotateLeft(Year *theNode);
+		void rotateRight(Year *theNode);
+		void rotateLeftKink(Year *theNode);
+		void rotateRightKink(Year *theNode);
 		
 	public:
 		Year *leftYear;
@@ -43,7 +43,9 @@ class Year{
 		unsigned int getYearNumber();
 		void setYearNumber(int yearNum);
 		unsigned int getHeight();
-		void adjustHeight(stack<string> &path);
+		void setHeight(int theHeight);
+		int getBalance() const;
+		int adjustHeight();
 		Month* getMonth(int monthNum) const;
 		
 };

@@ -36,11 +36,12 @@ Year* Calendar::insertYear(int yearNum){
     if(yearRoot == NULL){
         Year *tempYearNode = new Year(yearNum);
         yearRoot = tempYearNode;
-        yearRoot->adjustHeight(path);
+        yearRoot->adjustHeight();
         return yearRoot;
     }
     
     Year *currYear = yearRoot;
+    Year* prevYear = NULL;
     Year* returnYear = NULL;
     while(currYear){
         if(yearNum < currYear->getYearNumber()){
@@ -48,23 +49,29 @@ Year* Calendar::insertYear(int yearNum){
                 currYear->leftYear = new Year(yearNum);
                 currYear->leftYear->parent = currYear;
                 currYear = currYear->leftYear;
+                currYear->setHeight(1);
                 returnYear = currYear;
                 
-                // Update Heights traverse to parents to NULL and DO necessary rotations
-                currYear->adjustHeight(path);
-                while(currYear->parent != NULL){
+                // // Update Heights traverse to parents to NULL and DO necessary rotations
+                // currYear->adjustHeight(path);
+                // while(currYear->parent != NULL){
                     
-                    // Keep track of the path traversed from bottom to top
-                    if(currYear->parent->leftYear == currYear){
-                        path.push("L");
-                    }
-                    else if(currYear->parent->rightYear == currYear){
-                        path.push("R");
-                    }
+                //     // Keep track of the path traversed from bottom to top
+                //     if(currYear->parent->leftYear == currYear){
+                //         path.push("L");
+                //     }
+                //     else if(currYear->parent->rightYear == currYear){
+                //         path.push("R");
+                //     }
+                //     currYear = currYear->parent;
+                //     currYear->adjustHeight(path);
+                // }
+                while(currYear != NULL){
+                    currYear->adjustHeight();
+                    prevYear = currYear;
                     currYear = currYear->parent;
-                    currYear->adjustHeight(path);
                 }
-                yearRoot = currYear;                // currYear has reached the most top node, set yearRoot to currYear
+                yearRoot = prevYear;                // currYear has reached passed the most top node, set yearRoot to currYear
                 return returnYear;
             }
             else currYear = currYear->leftYear;
@@ -74,23 +81,29 @@ Year* Calendar::insertYear(int yearNum){
                 currYear->rightYear = new Year(yearNum);
                 currYear->rightYear->parent = currYear;
                 currYear = currYear->rightYear;
+                currYear->setHeight(1);
                 returnYear = currYear;
                 
                 // Update Heights traverse to parents to NULL and DO necessary rotations
-                currYear->adjustHeight(path);
-                while(currYear->parent != NULL){
+                // currYear->adjustHeight(path);
+                // while(currYear->parent != NULL){
                     
-                    // Keep track of the path traversed from bottom to top
-                    if(currYear->parent->leftYear == currYear){
-                        path.push("L");
-                    }
-                    else if(currYear->parent->rightYear == currYear){
-                        path.push("R");
-                    }
+                //     // Keep track of the path traversed from bottom to top
+                //     if(currYear->parent->leftYear == currYear){
+                //         path.push("L");
+                //     }
+                //     else if(currYear->parent->rightYear == currYear){
+                //         path.push("R");
+                //     }
+                //     currYear = currYear->parent;
+                //     currYear->adjustHeight(path);
+                // }
+                while(currYear != NULL){
+                    currYear->adjustHeight();
+                    prevYear = currYear;
                     currYear = currYear->parent;
-                    currYear->adjustHeight(path);
                 }
-                yearRoot = currYear;            // currYear has reached the most top node, set yearRoot to currYear
+                yearRoot = prevYear;            // currYear has reached the most top node, set yearRoot to currYear
                 return returnYear;
             }
             else currYear = currYear->rightYear;
@@ -105,6 +118,13 @@ Year* Calendar::insertYear(int yearNum){
 
 Year* Calendar::getYearRoot() const{
     return yearRoot;
+}
+
+bool Calendar::setEvent(int y, int m, int d, const string &todoString, const int imp){
+    Year* theYear = insertYear(y);
+    Month* theMonth = theYear->getMonth(m);
+    Day* theDay = theMonth->getDay(d);
+    return theDay->insertTodo(todoString, imp);
 }
 
 int Calendar::monthNumDays(const int &yearNum, const int &monthNum){
