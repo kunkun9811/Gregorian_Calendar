@@ -71,11 +71,13 @@ class Calendar {
    	    void printYear();
    	    void printMonth();
    	    void printTodos() const;
-   	    bool setEvent(int y, int, int d, const string &todoString, const int imp);
    	    int monthNumDays(const int &yearNum, const int &monthNum);
    	    string monthName(const int &monthNum);
    	    int dayOfWeek(int y, int m, int d);
    	    void printCalendar(int year);
+   	    bool setEvent(int y, int, int d, const string &todoString, const int imp);
+   	    bool deleteEvent(int y, int m, int d, const string &todoString);
+   	    void printByImportance(int y, int m, int d);
    	    
    	    // Just to test tree, PRINT TREE
    	    void inorder(Year *yearNode) const;

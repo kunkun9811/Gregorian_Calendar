@@ -256,7 +256,7 @@ bool Day::removeNode(const Todo* theNode){
                     prevTodo = nodeToAdjust;
                     nodeToAdjust = nodeToAdjust->parent;
                 }
-                if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                // if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
                 todoRoot = prevTodo;
                 numOfThings--;
                 return true;
@@ -297,7 +297,7 @@ bool Day::removeNode(const Todo* theNode){
                         prevTodo = currTodo;
                         currTodo = currTodo->parent;
                     }
-                    if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                    // if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
                     todoRoot = prevTodo;
                 }
                 else if(nodeToDelete->rightTodo != NULL){
@@ -331,7 +331,7 @@ bool Day::removeNode(const Todo* theNode){
                         prevTodo = currTodo;
                         currTodo = currTodo->parent;
                     }
-                    if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                    // if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
                     todoRoot = prevTodo;
                 }
                 return true;
@@ -365,7 +365,7 @@ bool Day::removeNode(const Todo* theNode){
                     prevTodo = currTodo;
                     currTodo = currTodo->parent;
                 }
-                if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
+                // if(prevTodo == NULL) cout << "prevTodo is NULL" << endl;
                 todoRoot = prevTodo;
                 return true;
             }
@@ -418,7 +418,7 @@ bool Day::deleteEvent(const string &todoString){
         if(elementRemoved){
             string tempString = todoString;                         // printf only takes non-const char pointer
             char *stringFirstCharPtr = &(tempString.at(0));         // char pointer that points to the first element(or character) of the string
-            printf("Event '%s' removed.", stringFirstCharPtr);
+            // printf("Event '%s' removed.", stringFirstCharPtr);
             ostringstream oss;
             fstream outToFile;
             outToFile.open(fileName, ios_base::out | ios_base::trunc);           // To clear file
@@ -549,7 +549,8 @@ bool Day::insertTodo(const string &todoString, const int imp){
 
 void Day::printByImportance() const{
     cout << "______________________________________________________" << endl;
-    printf("NUMBER OF TASKS(%d/%d/%d) = %d \n\n", yearNumber, monthNumber, dayNumber, numOfThings);
+    if(numOfThings == 0) printf("There is nothing on %d/%d/%d\n", yearNumber, monthNumber, dayNumber);
+    printf("NUMBER OF TASKS(%d/%d/%d) = %d \n", yearNumber, monthNumber, dayNumber, numOfThings);
     cout << "*Sorted by Importance*" << endl;
     int i = 1;
     // if(todoRoot != NULL) cout << "****** TODO ROOT ********" << todoRoot->getTask() << endl;

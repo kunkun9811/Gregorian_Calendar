@@ -9,22 +9,208 @@
 
 using namespace std;
 
+void printMenu();
+void printCalendar(Calendar &theCalendar);
+void setEvent(Calendar &theCalendar);
+void deleteEvent(Calendar &theCalendar);
+void printByImportance(Calendar &theCalendar);
 
-/* TASK:
- *  (1) I need to adjustHeight in cases in day.cpp where it's not nodeToDelete with two children
- *
- *
- */
- 
-// I changed a insertYear in calendar.cpp
 int main() {
     
-    cout << "Calendar" << endl;
+    cout << "CALENDAR" << endl;
+    
+    Calendar theCalendar;
+    string userResponse = "1";
+    
+    while(true){
+        printMenu();
+        cout << "Response: ";
+        getline(cin, userResponse);
+        cout << endl;
+        if(userResponse == "1") printCalendar(theCalendar);
+        else if(userResponse == "2") setEvent(theCalendar);
+        else if(userResponse == "3") deleteEvent(theCalendar);
+        else if(userResponse == "4") printByImportance(theCalendar);
+        else if(userResponse == "Q" || userResponse == "q"){
+            cout << "Closing Program..." << endl;
+            cout << "Bye Bye!" << endl;
+            break;
+        }
+        else cout << "Invalid Input! Please look at the menu :)" << endl;
+        cout << "______________________________________________________________________________________________" << endl;
+    }
 
-    Calendar a;
-    a.printCalendar(1998);
-    a.setEvent(1998, 9, 15, "Jasmine's Birthday", 1);
-    a.printCalendar(1998);
+    
+    
+
+    return 0;
+}
+
+void printMenu(){
+    cout << "What would you like to do? " << endl;
+    cout << "(1) Print Calendar " << endl;
+    cout << "(2) Set an Event " << endl;
+    cout << "(3) Delete an Event " << endl;
+    cout << "(4) Print a day's task sorted by Importance " << endl;
+    cout << "(Q/q) Quit " << endl;
+    return;
+}
+
+void printCalendar(Calendar &theCalendar){
+    int year = 0;
+    string userResponse = "";
+    
+    cout << "Which year would you like to explore? " << endl;
+    getline(cin, userResponse);
+    year = stoi(userResponse);
+    theCalendar.printCalendar(year);
+    return;
+}
+
+void setEvent(Calendar &theCalendar){
+    string year;
+    string month;
+    string day;
+    string imp;
+    int theYear = 0;
+    int theMonth = 0;
+    int theDay = 0;
+    int theImp = 0;
+    string todoString = "";
+    char* addrTodo;
+    bool success = false;
+    
+    
+    cout << "Which year would you like to set an Event? ";
+    getline(cin, year);
+    theYear = stoi(year);
+    cout << endl;
+    
+    cout << "Which month? ";
+    getline(cin, month);
+    theMonth = stoi(month);
+    cout << endl;
+    
+    cout << "Which day? ";
+    getline(cin, day);
+    theDay = stoi(day);
+    cout << endl;
+    
+    cout << "What kind of task? (Describe in one short sentence) ";
+    getline(cin, todoString);
+    addrTodo = &(todoString.at(0));
+    cout << endl;
+    
+    cout << "How important is it? (From a scale of 1 ~ 5) ";
+    getline(cin, imp);
+    theImp = stoi(imp);
+    cout << endl;
+    
+    success = theCalendar.setEvent(theYear, theMonth, theDay, todoString, theImp);
+    if(success){
+        printf("Event '%s' successfully set on %d/%d/%d\n", addrTodo, theYear, theMonth, theDay);
+    }
+    else printf("Event was not set!\n");
+    return;
+}
+
+void deleteEvent(Calendar &theCalendar){
+    string year;
+    string month;
+    string day;
+    string imp;
+    int theYear = 0;
+    int theMonth = 0;
+    int theDay = 0;
+    int theImp = 0;
+    string todoString = "";
+    char* addrTodo;
+    bool success = false;
+    
+    
+    cout << "Which year would you like to delete an Event? ";
+    getline(cin, year);
+    theYear = stoi(year);
+    cout << endl;
+    
+    cout << "Which month? ";
+    getline(cin, month);
+    theMonth = stoi(month);
+    cout << endl;
+    
+    cout << "Which day? ";
+    getline(cin, day);
+    theDay = stoi(day);
+    cout << endl;
+    
+    cout << "Which task? (Please type exactly the same as the one currently on the Calendar) ";
+    getline(cin, todoString);
+    addrTodo = &(todoString.at(0));
+    cout << endl;
+    
+    success = theCalendar.deleteEvent(theYear, theMonth, theDay, todoString);
+    if(success){
+        printf("Event '%s' successfully deleted from %d/%d/%d\n", addrTodo, theYear, theMonth, theDay);
+    }
+    else printf("Event was not deleted!");
+    return;
+}
+
+void printByImportance(Calendar &theCalendar){
+    string year;
+    string month;
+    string day;
+    string imp;
+    int theYear = 0;
+    int theMonth = 0;
+    int theDay = 0;
+    int theImp = 0;
+    string todoString = "";
+    char* addrTodo;
+    bool success = false;
+    
+    
+    cout << "Which year would you like to print an Event? ";
+    getline(cin, year);
+    theYear = stoi(year);
+    cout << endl;
+    
+    cout << "Which month? ";
+    getline(cin, month);
+    theMonth = stoi(month);
+    cout << endl;
+    
+    cout << "Which day? ";
+    getline(cin, day);
+    theDay = stoi(day);
+    cout << endl;
+    
+    theCalendar.printByImportance(theYear, theMonth, theDay);
+    return;   
+}
+
+/* GAGDETS I CAN USE */
+// system("cls") - clear screen
+
+/* Things I changed temporarily */
+// rotations in year.hpp need to be moved back to private AND YEAR NUMBER
+// rotations in year.cpp: I cout a lot of I'm in *this rotation*
+// day.hpp: I moved priority_queue to public, it should be private
+// day.hpp: I moved todoRoot to public, it should be private
+
+/* THING I NEED TO ADD */
+// Time of when the thing is happening !!!!!!!!
+// I NEED TO NOT USE getline WHEN READING THE FILES. **DELETE EVENT AND DAY FILE IN DAY.CPP*
+    // NEED TO ALSO ADD DESCRIPTION, INSTEAD OF JUST TITLES
+
+
+/* TESTING OVERALL FUNCTIONALITY */
+    // Calendar a;
+    // a.printCalendar(1998);
+    // a.deleteEvent(1998, 9, 15, "Jasmine's Birthday");
+    // cout << "**********AFTER********" << endl;
+    // a.printCalendar(1998);
+    // a.printByImportance(1998, 1, 1);
     
     // cout << "______________________________________________________________" << endl;
     // a.printCalendar(1200);
@@ -50,24 +236,6 @@ int main() {
     // a.printCalendar(1920);
     
     // a.inorder(a.yearRoot);
-    return 0;
-}
-
-
-
-/* GAGDETS I CAN USE */
-// system("cls") - clear screen
-
-/* Things I changed temporarily */
-// rotations in year.hpp need to be moved back to private AND YEAR NUMBER
-// rotations in year.cpp: I cout a lot of I'm in *this rotation*
-// day.hpp: I moved priority_queue to public, it should be private
-// day.hpp: I moved todoRoot to public, it should be private
-
-/* THING I NEED TO ADD */
-// Time of when the thing is happening !!!!!!!!
-// I NEED TO NOT USE getline WHEN READING THE FILES. **DELETE EVENT AND DAY FILE IN DAY.CPP*
-    // NEED TO ALSO ADD DESCRIPTION, INSTEAD OF JUST TITLES
     
 /* TESTING SETTING EVENT ON DAY.CPP */
 //     Day a(1998, 1, 2);

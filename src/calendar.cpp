@@ -120,13 +120,6 @@ Year* Calendar::getYearRoot() const{
     return yearRoot;
 }
 
-bool Calendar::setEvent(int y, int m, int d, const string &todoString, const int imp){
-    Year* theYear = insertYear(y);
-    Month* theMonth = theYear->getMonth(m);
-    Day* theDay = theMonth->getDay(d);
-    return theDay->insertTodo(todoString, imp);
-}
-
 int Calendar::monthNumDays(const int &yearNum, const int &monthNum){
 	if(monthNum == 1){
 		return (31);	
@@ -228,5 +221,27 @@ void Calendar::printCalendar(int year){
                 
         currDayNum = j;
     }
+    return;
+}
+
+bool Calendar::setEvent(int y, int m, int d, const string &todoString, const int imp){
+    Year* theYear = insertYear(y);
+    Month* theMonth = theYear->getMonth(m);
+    Day* theDay = theMonth->getDay(d);
+    return theDay->setEvent(todoString, imp);
+}
+
+bool Calendar::deleteEvent(int y, int m, int d, const string &todoString){
+    Year* theYear = insertYear(y);
+    Month* theMonth = theYear->getMonth(m);
+    Day* theDay = theMonth->getDay(d);
+    return theDay->deleteEvent(todoString);
+}
+
+void Calendar::printByImportance(int y, int m, int d){
+    Year* theYear = insertYear(y);
+    Month* theMonth = theYear->getMonth(m);
+    Day* theDay = theMonth->getDay(d);
+    theDay->printByImportance();
     return;
 }
