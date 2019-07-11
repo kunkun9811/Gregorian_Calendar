@@ -1,8 +1,9 @@
 ** FORMAT FOR EACH TODO FILE **     [exclude line 1 ~ 6, line 7 is the starting line]
 ** FILE NAME = 1998-1-1.txt
 2               <- IMPORTANCE
+12:30           <- Start time
+01:30           <- End time
 Wash Dishes     <- TODO
-^
 
 1
 Do Homework

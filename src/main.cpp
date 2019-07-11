@@ -13,7 +13,9 @@ int main() {
     cout << "Calendar" << endl;
 
     Calendar a;
-    a.printCalendar(1998);
+    a.printCalendar(1996);
+    
+    a.setEvent(1996, 1, 1, "Hi", 1);
     
     return 0;
 }

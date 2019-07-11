@@ -59,7 +59,7 @@ void Day::inorder(const Todo * const &todoNode, int &i) const{
     printf("(%d) ", i);
     string tempString = todoNode->getTask();
     char *stringPtr = &(tempString.at(0));
-    printf("TODO: %s \n \n", stringPtr);
+    printf(" %s \n \n", stringPtr);
     i++;
     inorder(todoNode->rightTodo, i);
     return;
@@ -78,7 +78,7 @@ void Day::readDayFile(){
     // string separator;       // The separating '^' character after each TODO in formatted text file
     ifstream dayFile(fileName);
     if(!dayFile.is_open()){             // If file doesn't exist, do nothing
-        return; 
+        return;
     }
     else{
         // Reset Tree first
@@ -89,7 +89,7 @@ void Day::readDayFile(){
             getline(dayFile, todo);
             // getline(dayFile, separator);
             insertTodo(todo, stoi(imp));
-            
+
             // //Printing Tree to see tree structure after each insert;
             // cout << "(*****" << i++ << "*****)" << endl;
             // inorderTest(todoRoot);
@@ -137,22 +137,22 @@ bool Day::setEvent(const string &todoString, const int imp){
         cout << "Please enter an event or make sure Importance level is between 1 and 5" << endl;
         return false;
     }
-    
+
 }
 
 // Edge case: If the successor is the immediate rightTodo Node of the nodeToDelete
-//            If it is, don't set the rightTodo of Successor to the rightTodo 
+//            If it is, don't set the rightTodo of Successor to the rightTodo
 //            of the nodeToDelete
 
 
 /* Helper function for deleteEvent
  * Purpose: Delete the todo node in the AVL data structure of Todo class
- * 
+ *
  * Algorithm: (1) Check if the task is the same, if yes check the three cases
  *                  (a) nodeToDelete has two children
  *                  (b) nodeToDelete has one children
  *                  (c) nodeToDelete has no child
- * 
+ *
  *            (2) If the task is not the same, traverse tree **WITH THENODE'S IMPORTANCE**, not the node's task
  *                  (a) If theNode's importance is less than nodeToDelete's (or currNode's), traverse left subtree
  *                  (b) If theNode's importance is greater or equal to nodeToDelete's (or currNode's) importance, traverse right subtree
@@ -164,22 +164,22 @@ bool Day::removeNode(const Todo* theNode){
             /* Node to delete has two children */
             if(nodeToDelete->leftTodo != NULL && nodeToDelete->rightTodo != NULL){
                 Todo* theSuccessor = nodeToDelete->getSuccessor();
-                Todo* theSucOldParent = theSuccessor->parent;              // Later we traverse from 
-                
+                Todo* theSucOldParent = theSuccessor->parent;              // Later we traverse from
+
                 /* I don't think I need to check if theSuccessor is the left or right child of its parent,
                  * Because we are finding the left-most node in the right subtree(aka the meaning of successor)
                  * If It is the immediate right node of the nodeToDelete, then still we don't have to check
                  * if it is left node or right node of the parent. Because, in this case and any other,
-                 * if the successor has a right child (definitely not going to have a left child, or else we would've traversed left), 
+                 * if the successor has a right child (definitely not going to have a left child, or else we would've traversed left),
                  * then connect that right child to the successor's old parent (which in this case would be the 'modified' nodeToDelete)
                  * Just like how you would do to the left most node of right subtree (aka any other successors)
                  */
-                 
+
                  /* HERE , i think i deleted theSuccessor not the node to be deleted LOL */
                 if(theSuccessor->rightTodo != NULL){
                     // Set right node of theSuccessor to theSucOldParent (no matter what)
-                    theSuccessor->rightTodo->parent = theSucOldParent;                      
-                    
+                    theSuccessor->rightTodo->parent = theSucOldParent;
+
                     // If successor is the imeediate right node of nodeToDelete
                     if(theSuccessor == nodeToDelete->rightTodo) {
                         theSucOldParent->rightTodo = theSuccessor->rightTodo;
@@ -188,7 +188,7 @@ bool Day::removeNode(const Todo* theNode){
                     else {
                         theSucOldParent->leftTodo = theSuccessor->rightTodo;
                     }
-                } 
+                }
                 else{   // theSuccessor->rightTodo == NULL
                     // If successor is the imeediate right node of nodeToDelete
                     if(theSuccessor == nodeToDelete->rightTodo) {
@@ -202,23 +202,23 @@ bool Day::removeNode(const Todo* theNode){
                 nodeToDelete->setTask(theSuccessor->getTask());
                 nodeToDelete->setImportance(theSuccessor->getImportance());
                 delete theSuccessor;
-               
+
                 Todo* nodeToAdjust = theSucOldParent;
                 Todo* prevTodo = NULL;
                 // stack<string> path;         // There's no need for path stack here. It is for function calling
                 // int LHeight = 0;
                 // int RHeight = 0;
-                
+
                 // while(nodeToAdjust != NULL){
                 //     /* Adjust Height for Remove */
-                    
+
                 //     // Check if Tree is unbalanced
                 //     if(nodeToAdjust->leftTodo == NULL) LHeight = 0;
                 //     else LHeight = nodeToAdjust->leftTodo->getHeight();
-                    
+
                 //     if(nodeToAdjust->rightTodo == NULL) RHeight = 0;
                 //     else RHeight = nodeToAdjust->rightTodo->getHeight();
-                    
+
                 //     if(abs(LHeight - RHeight) > 1){
                 //         // cout << "********I'm here in checking**********" << endl;
                 //         if(RHeight > LHeight){          // Have not reached root yet
@@ -233,9 +233,9 @@ bool Day::removeNode(const Todo* theNode){
                 //             }
                 //         }
                 //         else{   // LHeight > RHeihgt
-                //             if(nodeToAdjust->leftTodo != NULL){ 
+                //             if(nodeToAdjust->leftTodo != NULL){
                 //                 // cout << "I'm in LL LR" << endl;
-                //                 if(nodeToAdjust->leftTodo->leftTodo != NULL){           // LL 
+                //                 if(nodeToAdjust->leftTodo->leftTodo != NULL){           // LL
                 //                     // cout << "I'm here ahha" << endl;
                 //                     nodeToAdjust->rotateRight(nodeToAdjust);
                 //                 }
@@ -261,9 +261,9 @@ bool Day::removeNode(const Todo* theNode){
                 numOfThings--;
                 return true;
             }
-            
+
             /* Node to delete has one child */
-            // Algorithm: only have to pull the only child up and point to nodeToDelete's old parent and 
+            // Algorithm: only have to pull the only child up and point to nodeToDelete's old parent and
             //            the old parent point to nodeToDelete's only child
             else if(nodeToDelete->leftTodo != NULL || nodeToDelete->rightTodo != NULL){
                 if(nodeToDelete->leftTodo != NULL){
@@ -289,7 +289,7 @@ bool Day::removeNode(const Todo* theNode){
                         numOfThings--;
                         // return true;
                     }
-                    
+
                     Todo* currTodo = nodeToDeleteLeftTodo;
                     Todo* prevTodo = NULL;
                     while(currTodo){
@@ -323,7 +323,7 @@ bool Day::removeNode(const Todo* theNode){
                         numOfThings--;
                         // return true;
                     }
-                    
+
                     Todo* currTodo = nodeToDeleteRightTodo;
                     Todo* prevTodo = NULL;
                     while(currTodo){
@@ -336,7 +336,7 @@ bool Day::removeNode(const Todo* theNode){
                 }
                 return true;
             }
-            
+
             /* Node To delete has no children */
             else if(nodeToDelete->leftTodo == NULL && nodeToDelete->rightTodo == NULL){
                 Todo* toDeleteParent = nodeToDelete->parent;
@@ -357,7 +357,7 @@ bool Day::removeNode(const Todo* theNode){
                     numOfThings--;
                     // return true;
                 }
-                
+
                 Todo* currTodo = toDeleteParent;
                 Todo* prevTodo = NULL;
                 while(currTodo){
@@ -381,14 +381,14 @@ bool Day::removeNode(const Todo* theNode){
 // Purpose: Find and remove the string(or the todo) passed in and the importance value associated to it
 bool Day::deleteEvent(const string &todoString){
     string fileName = "../server/" + to_string(yearNumber) + "-" + to_string(monthNumber) + "-" + to_string(dayNumber) + ".txt";
-    
+
     string imp;         // variable to temporary store the importance value in the file
     string todo;        // varaible to temporary store the todo value in the file
     int theImp;      // variable used to create temporary Todo Node to traverse tree later in removeNode
     string theTodo;     // variable used to create temporary Todo Node to traverse tree later in removeNode
     vector<int> impVector;          // vector to store all the importance level
     vector<string> todoVector;      // vector to store all the todos
-    
+
     ifstream fileToRemoveFrom;
     fileToRemoveFrom.open(fileName);
     if(!fileToRemoveFrom.is_open()){
@@ -441,7 +441,7 @@ bool Day::deleteEvent(const string &todoString){
                 outToFile.close();
             }
             outToFile.close();                          // close the output file
-            
+
             // Create temporary Todo Node to traverse Tree
             Todo* tempTodo = new Todo(theTodo, theImp);
             // if(tempTodo->parent == NULL) cout << "parent is null" << endl;
@@ -457,7 +457,7 @@ bool Day::deleteEvent(const string &todoString){
             printf("**Attempted to Delete event. Event was not found on '%d/%d/%d'**\n\n", yearNumber, monthNumber, dayNumber);
             return false;
         }
-    }   
+    }
     return false;
 }
 
@@ -470,7 +470,7 @@ bool Day::insertTodo(const string &todoString, const int imp){
         numOfThings++;
         return true;
     }
-    
+
     Todo* currTodo = todoRoot;
     Todo* prevTodo = NULL;
     int balance = 0;
@@ -481,11 +481,11 @@ bool Day::insertTodo(const string &todoString, const int imp){
                 currTodo->leftTodo->parent = currTodo;
                 currTodo = currTodo->leftTodo;
                 currTodo->setHeight(1);
-                
+
                 // Update Heights traverse to parents to NULL and DO necessary rotations
                 // currTodo->adjustHeight();
                 // while(currTodo->parent != NULL){
-                    
+
                 //     // Keep track of the path traversed from bottom to top
                 //     if(currTodo->parent->leftTodo == currTodo){
                 //         path.push("L");
@@ -493,7 +493,7 @@ bool Day::insertTodo(const string &todoString, const int imp){
                 //     else if(currTodo->parent->rightTodo == currTodo){
                 //         path.push("R");
                 //     }
-                //     currTodo = currTodo->parent;            
+                //     currTodo = currTodo->parent;
                 //     currTodo->adjustHeight(path);
                 // }
                 while(currTodo != NULL){
@@ -513,11 +513,11 @@ bool Day::insertTodo(const string &todoString, const int imp){
                 currTodo->rightTodo->parent = currTodo;
                 currTodo = currTodo->rightTodo;
                 currTodo->setHeight(1);
-                
+
                 // Update Heights traverse to parents to NULL and DO necessary rotations
                 // currTodo->adjustHeight();
                 // while(currTodo->parent != NULL){
-                    
+
                 //     // Keep track of the path traversed from bottom to top
                 //     if(currTodo->parent->leftTodo == currTodo){
                 //         path.push("L");
